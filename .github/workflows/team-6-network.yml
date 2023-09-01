@@ -45,7 +45,7 @@ jobs:
         mv -v Team6/NetworkPlay-src/*.bat dist/
         curl -o java.zip https://download.java.net/openjdk/jdk8u43/ri/openjdk-8u43-windows-i586.zip
         unzip java.zip
-        mv -v jre dist/
+        mv -v java-se-8u43-ri/jre dist/
 
     - name: Upload build as artifact
       if: always()
