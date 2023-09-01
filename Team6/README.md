@@ -1,4 +1,4 @@
-# Team 6 
+# Team 6
 
 Documentation commune à la plupart des jeux de [Team 6](https://team6-games.com) qui sont sortis à peu près entre 2004 et 2007 et qui sont basés sur [Manhattan Chase](https://archive.org/details/manhattan-chase), notamment [Alpha Zylon](https://store.steampowered.com/app/313210/Alpha_Zylon/), [Pizza Dude](https://archive.org/details/pizza-dude), [Glacier](https://archive.org/details/glacier_202306) et [Ultimate Motorcross (sic)](https://archive.org/details/umcross).
 
