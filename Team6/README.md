@@ -37,7 +37,13 @@ Quand le mode test est activé, quelques touches gagnent une nouvelle fonction :
   - F1 : sortir du mode free cam
 - T : affiche une grille et fait lag le jeu (je sais pas trop ce que ça représente ce truc là)
 
+## Jeu en réseau 
 
+La plupart des jeux de cette époque fonctionnent de la même façon pour ce qui est du jeu en réseau : en mode "jeu local", le serveur envoie un paquet à tout le réseau local (broadcast UDP sur le port 24958), les clients l'attrapent et se connectent en TCP (toujours sur le port 24958) à l'expéditeur du paquet UDP.
+
+Le programme Java présent dans le dossier `NetworkPlay-src` permet de jouer en réseau en utilisant le mode "jeu local" en transmettant juste les paquets TCP et UDP entre les participants. Celui qui host le serveur doit ouvrir le port 4480 et lancer `Run Server.bat`, les clients doivent lancer `Run Client.bat` et taper l'adresse IP du serveur.
+
+Les jeux Team 6 ont un mode "jeu en ligne", mais il essaie de récupérer une page qui n'existe plus sur le site de Team 6. 😛
 
 
 
