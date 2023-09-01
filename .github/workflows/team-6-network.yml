@@ -32,7 +32,7 @@ jobs:
 
     - name: Check for trailing spaces
       run: |
-        find "(" -name "*.java" -or -name "*.yml" -or -name "*.md" "-or -name "*.bat" )" -exec grep -Pl " $" {} \; > matches.txt
+        find "(" -name "*.java" -or -name "*.yml" -or -name "*.md" "-or -name "*.bat" ")" -exec grep -Pl " $" {} \; > matches.txt
         grep "" matches.txt && exit 1 || echo "No trailing space found!"
 
     - name: Build and Prepare Package
