@@ -23,7 +23,17 @@ Une console pop en appuyant sur ². Voici quelques commandes (lancer le jeu en m
 - `missioneditor` : ouvre le _mission editor_. Vu qu'il n'y a pas de curseur, c'est pas très très pratique à moins de lancer le jeu en fenêtré 😛 La commande affiche aussi les triggers dans le jeu et affiche des modèles supplémentaires sur la map.
 - `camedit` : permet de déplacer la caméra par rapport au joueur (+/- sur le pavé numérique modifie le FOV). Relancer la commande va fixer la caméra de nouveau, ce qui permet de jouer avec la caméra modifiée.
 - `shownodes` : affiche le parcours du trafic dans Pizza Dude (et peut-être d'autres trucs dans d'autres jeux, j'ai pas testé 😛)
+- `fps` : un compteur de FPS
 
+## Touches de débug
+
+Quand le mode test est activé, quelques touches gagnent une nouvelle fonction :
+- X : passe en mode free cam
+  - ZQSD : se déplacer
+  - +/- : modifier le FOV
+  - Il me semble qu'il y a des touches pour modifier la distance d'affichage mais je m'en souviens plus 😅
+  - F1 : sortir du mode free cam
+- T : affiche une grille et fait lag le jeu (je sais pas trop ce que ça représente ce truc là)
 
 
 
