@@ -43,7 +43,7 @@ La plupart des jeux de cette époque fonctionnent de la même façon pour ce qui
 
 Le programme Java présent dans le dossier `NetworkPlay-src` permet de jouer en réseau en utilisant le mode "jeu local" en transmettant juste les paquets TCP et UDP entre les participants. Celui qui host le serveur doit ouvrir le port 4480 et lancer `Run Server.bat`, les clients doivent lancer `Run Client.bat` et taper l'adresse IP du serveur.
 
-Les jeux Team 6 ont un mode "jeu en ligne", mais il essaie de récupérer une page qui n'existe plus sur le site de Team 6. 😛
+Les jeux Team 6 ont un mode "jeu en ligne", mais il essaie de récupérer une page qui n'existe plus sur le site de Team 6 (plus précisément `http://team6-games.com:80/Game_GetHosts.php`), et donc ça va pas très loin. 😛
 
 
 
