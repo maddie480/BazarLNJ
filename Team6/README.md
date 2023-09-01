@@ -24,6 +24,8 @@ Une console pop en appuyant sur ². Voici quelques commandes (lancer le jeu en m
 - `camedit` : permet de déplacer la caméra par rapport au joueur (+/- sur le pavé numérique modifie le FOV). Relancer la commande va fixer la caméra de nouveau, ce qui permet de jouer avec la caméra modifiée.
 - `shownodes` : affiche le parcours du trafic dans Pizza Dude (et peut-être d'autres trucs dans d'autres jeux, j'ai pas testé 😛)
 - `fps` : un compteur de FPS
+- `wireframe` : passe en affichage "fil de fer"
+- `sleeptime <secondes>` : ajoute une pause entre deux frames. Oui, il y a une commande pour faire lag le jeu. 😛
 
 ## Touches de débug
 
