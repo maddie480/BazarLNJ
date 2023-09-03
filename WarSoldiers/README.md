@@ -54,3 +54,11 @@ Je sais pas si ces fonctions sont documentées dans le manuel, en tout cas rien 
 - F3 : quick load
 - F5 : change de résolution (sans repositionner le HUD en conséquence :facepalm:)
 - F6 : prend une capture d'écran et l'enregistre dans le dossier du jeu, sous le nom `shot_X.PCX`. Reste maintenant à trouver un éditeur d'image qui sait ouvrir les fichiers PCX.
+
+## Le faux god mode
+
+Le jeu a 3 niveaux de difficulté. Tout ce que ça change, c'est la quantité de dégâts que tu te prends par les ennemis et par les mines.
+
+En mettant une difficulté qui n'existe pas, on modifie cette quantité de dégât à ... 0. Sans pour autant avoir activé le god mode, donc le personnage pousse toujours des cris comme s'il se prenait des dégâts. Ce qui donne des situations assez particulières...
+
+Pour "activer" ce faux god mode :tm:, déposer le fichier xxx.txt présent sur ce dépôt dans le dossier du jeu.
