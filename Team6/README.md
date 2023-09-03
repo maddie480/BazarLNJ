@@ -45,5 +45,8 @@ Le programme Java présent dans le dossier `NetworkPlay-src` permet de jouer en 
 
 Les jeux Team 6 ont un mode "jeu en ligne", mais il essaie de récupérer une page qui n'existe plus sur le site de Team 6 (plus précisément `http://team6-games.com:80/Game_GetHosts.php`), et donc ça va pas très loin. 😛
 
+# Pizza Code Finder
 
+Un petit projet qui recherche des codes valides pour... [Call-a-Pizza Dude](https://web.archive.org/web/20070513220907/http://www.call-a-pizza.de/dude/), que tu pouvais visiblement obtenir en achetant une pizza chez Call-a-Pizza en Allemagne. :shrug:
 
+D'après ce machin-là, il y a plus d'1 million de codes valides. J'en ai testé uniquement 3 ou 4 hein :stuck_out_tongue:

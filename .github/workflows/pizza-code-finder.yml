@@ -1,0 +1,55 @@
+name: Build and run Pizza Code Finder
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'adopt'
+
+    - name: Check for tabs
+      run: |
+        find "(" -name "*.java" -or -name "*.yml" -or -name "*.md" -or -name "*.bat" ")" -exec grep -Pl "\t" {} \; > matches.txt
+        grep "" matches.txt && exit 1 || echo "No tab found!"
+
+    - name: Check for CRLF
+      run: |
+        find "(" -name "*.java" -or -name "*.yml" -or -name "*.md" -or -name "*.bat" ")" -exec grep -Plz "\r\n" {} \; > matches.txt
+        grep "" matches.txt && exit 1 || echo "No CRLF found!"
+
+    - name: Check for trailing spaces
+      run: |
+        find "(" -name "*.java" -or -name "*.yml" -or -name "*.md" -or -name "*.bat" ")" -exec grep -Pl " $" {} \; > matches.txt
+        grep "" matches.txt && exit 1 || echo "No trailing space found!"
+
+    - name: Build
+      run: cd Team6/PizzaCodeFinder-src && javac ovh/maddie480/PizzaCodeFinder.java
+
+    - name: Run
+      env:
+        CALLAPIZZA_DUDE_URL: ${{ secrets.CALLAPIZZA_DUDE_URL }}
+      run: |
+        curl -o "Pizza CAP.exe" $CALLAPIZZA_DUDE_URL
+        mkdir out
+        java -cp Team6/PizzaCodeFinder-src ovh.maddie480.PizzaCodeFinder > out/pizza_codes.txt
+        echo "Here is a random pizza code:"
+        shuf -n 1 out/pizza_codes.txt
+
+    - name: Upload found codes as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PizzaCodes
+        path: out
