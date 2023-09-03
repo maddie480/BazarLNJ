@@ -26,6 +26,7 @@ Une console pop en appuyant sur ². Voici quelques commandes (lancer le jeu en m
 - `fps` : un compteur de FPS
 - `wireframe` : passe en affichage "fil de fer"
 - `sleeptime <secondes>` : ajoute une pause entre deux frames. Oui, il y a une commande pour faire lag le jeu. 😛
+- `showdf` : met en surbrillance toutes les pubs de ce jeu. Il y en a **beaucoup**, elles sont stockées dans `misc\DF`, et le jeu essaie même de contacter une régie publicitaire du nom de "DoubleFusion" pour les actualiser, mais ça fonctionne pas. 😛
 
 ## Touches de débug
 
@@ -45,8 +46,24 @@ Le programme Java présent dans le dossier `NetworkPlay-src` permet de jouer en 
 
 Les jeux Team 6 ont un mode "jeu en ligne", mais il essaie de récupérer une page qui n'existe plus sur le site de Team 6 (plus précisément `http://team6-games.com:80/Game_GetHosts.php`), et donc ça va pas très loin. 😛
 
-# Pizza Code Finder
+## Les scripts custom Pizza Dude (dossier `PizzaDudeScripts`)
+
+Les seuls et uniques mods de Pizza Dude qui existent sur la planète, réalisés avec le superbe mission editor de Pizza Dude.
+
+Pour les lancer, soit remplacer `Scripts\Pizzadude.dcScript` par l'un des scripts, ou les extraire tous dans `Scripts` et en mode test, lancer la commande `loadscript <nom du script>`.
+
+- `RushHour.dcScript` : augmente **considérablement** la quantité de trafic. Passez près des voitures avec le quad pour qu'elles s'empilent et que ça donne un flot de voitures qui a aucun sens !
+- `cauchemar_en_cuisine.dcScript` : augmente la durée des animations de "cuisine" des ingrédients. On peut donc activer toutes les animations en même temps, et ça donne une cuisine hantée... voilà.
+- `argh.dcScript` (dérivé de `cauchemar_en_cuisine.dcScript`) : remplace le son de découpe de la tomate par plusieurs sons de chute du quad de Pizza Dude.
+
+# Le Turbo Quad :tm:
+
+Dans `vehicles`, remplacer `Quad.dcc` par `TurboQuad.dcc` pour obtenir un quad qui peut facilement monter à 250 km/h. Fonctionne avec tous les véhicules (que j'ai testés) dans les jeux de Team 6 de l'époque, notamment Glacier.
+
+## Pizza Code Finder
 
 Un petit projet qui recherche des codes valides pour... [Call-a-Pizza Dude](https://web.archive.org/web/20070513220907/http://www.call-a-pizza.de/dude/), que tu pouvais visiblement obtenir en achetant une pizza chez Call-a-Pizza en Allemagne. :shrug:
 
 D'après ce machin-là, il y a plus d'1 million de codes valides. J'en ai testé uniquement 3 ou 4 hein :stuck_out_tongue:
+
+~~sinon la commande `loadscript bonus` ça marche aussi~~
