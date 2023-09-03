@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net452</TargetFrameworks>
     <AssemblyName>Assembly-UnityScript.Mod.mm</AssemblyName>
@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MonoMod" Version="22.01.04.03" />
+    <PackageReference Include="MonoMod" Version="22.7.31.1" />
   </ItemGroup>
 
   <ItemGroup>
