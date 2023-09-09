@@ -1,0 +1,38 @@
+name: Build and run Psycho Killer Media Converter
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'adopt'
+
+    - name: Build
+      run: cd PsychoKiller/MediaConverter-src && javac ovh/maddie480/MediaConverter.java
+
+    - name: Prepare run
+      run: sudo apt-get install ffmpeg
+
+    - name: Run
+      env:
+        PSYCHO_KILLER_SRC: ${{ secrets.PSYCHO_KILLER_SRC }}
+      run: |
+        java -cp PsychoKiller/MediaConverter-src ovh.maddie480.MediaConverter
+
+    - name: Upload converted assets as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PsychoKillerAssets
+        path: output
