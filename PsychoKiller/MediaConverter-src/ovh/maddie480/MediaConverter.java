@@ -62,7 +62,7 @@ public class MediaConverter {
                         format = "mp4";
                     }
                 } else if (hasAudio) {
-                    format = "mp3";
+                    format = "wav";
                 } else {
                     Files.delete(tmp);
                     continue;
