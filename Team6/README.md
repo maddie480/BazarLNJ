@@ -67,3 +67,8 @@ Un petit projet qui recherche des codes valides pour... [Call-a-Pizza Dude](http
 D'après ce machin-là, il y a plus d'1 million de codes valides. J'en ai testé uniquement 3 ou 4 hein :stuck_out_tongue:
 
 ~~sinon la commande `loadscript bonus` ça marche aussi~~
+
+# Débloquer toutes les courses
+
+- Dans Glacier, lancer le jeu en mode test et lancer `loadscript gameover`. La cinématique de fin te donne suffisamment d'argent et de respect pour déverrouiller toutes les courses. :stuck_out_tongue:
+- Dans Ultimate Motorcross, déposer le script `UltimateMotorcrossScripts/Win.dcScript` dans le dossier `Scripts` du jeu, puis le lancer en mode test. Puis, lancer une course et taper `loadscript win` pour la gagner et débloquer la suivante. ^^
