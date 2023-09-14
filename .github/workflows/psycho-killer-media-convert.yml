@@ -23,7 +23,7 @@ jobs:
       run: cd PsychoKiller/MediaConverter-src && javac ovh/maddie480/MediaConverter.java
 
     - name: Prepare run
-      run: sudo apt-get install ffmpeg
+      run: sudo apt-get update && sudo apt-get install ffmpeg
 
     - name: Run
       env:

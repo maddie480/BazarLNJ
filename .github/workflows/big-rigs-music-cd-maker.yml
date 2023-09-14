@@ -21,7 +21,7 @@ jobs:
 
         curl https://www.myabandonware.com/game/big-rigs-over-the-road-racing-bc4 --cookie-jar cookie.txt > /dev/null
         curl -Lo Big_Rigs.zip https://www.myabandonware.com/download/r5p-big-rigs-over-the-road-racing --cookie cookie.txt
-        
+
         7z x Big_Rigs.zip
         7z x BROTRR.iso
 
