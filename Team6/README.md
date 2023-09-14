@@ -56,7 +56,13 @@ Pour les lancer, soit remplacer `Scripts\Pizzadude.dcScript` par l'un des script
 - `cauchemar_en_cuisine.dcScript` : augmente la durée des animations de "cuisine" des ingrédients. On peut donc activer toutes les animations en même temps, et ça donne une cuisine hantée... voilà.
 - `argh.dcScript` (dérivé de `cauchemar_en_cuisine.dcScript`) : remplace le son de découpe de la tomate par plusieurs sons de chute du quad de Pizza Dude.
 
-# Le Turbo Quad :tm:
+## Le script custom Glacier (dossier `GlacierScripts`)
+
+Même chose que Pizza Dude pour le lancer.
+
+- `OneToRuleThemAll.dcscript` : la première course du jeu, mais tu contrôles _les 3 voitures en même temps_.
+
+## Le Turbo Quad :tm:
 
 Dans `vehicles`, remplacer `Quad.dcc` par `TurboQuad.dcc` pour obtenir un quad qui peut facilement monter à 250 km/h. Fonctionne avec tous les véhicules (que j'ai testés) dans les jeux de Team 6 de l'époque, notamment Glacier.
 
@@ -68,7 +74,10 @@ D'après ce machin-là, il y a plus d'1 million de codes valides. J'en ai testé
 
 ~~sinon la commande `loadscript bonus` ça marche aussi~~
 
-# Débloquer toutes les courses
+## Débloquer toutes les courses
 
 - Dans Glacier, lancer le jeu en mode test et lancer `loadscript gameover`. La cinématique de fin te donne suffisamment d'argent et de respect pour déverrouiller toutes les courses. :stuck_out_tongue:
 - Dans Ultimate Motorcross, déposer le script `UltimateMotorcrossScripts/Win.dcScript` dans le dossier `Scripts` du jeu, puis le lancer en mode test. Puis, lancer une course et taper `loadscript win` pour la gagner et débloquer la suivante. ^^
+- La procédure pour Ultimate Motorcross fonctionne aussi pour Scooter War3z... parce que bon, c'est pratiquement le même jeu. :stuck_out_tongue:
+
+
