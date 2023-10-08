@@ -80,4 +80,16 @@ D'après ce machin-là, il y a plus d'1 million de codes valides. J'en ai testé
 - Dans Ultimate Motorcross, déposer le script `UltimateMotorcrossScripts/Win.dcScript` dans le dossier `Scripts` du jeu, puis le lancer en mode test. Puis, lancer une course et taper `loadscript win` pour la gagner et débloquer la suivante. ^^
 - La procédure pour Ultimate Motorcross fonctionne aussi pour Scooter War3z... parce que bon, c'est pratiquement le même jeu. :stuck_out_tongue:
 
+## Les fichiers de langue
 
+La plupart des jeux Team 6 ont leur texte stocké dans un fichier de langue, présent dans `misc/English.DCL`. Ce fichier a un format... étrange.
+
+Et ça tombe bien, Erwin nous a laissé son utilitaire de conversion, _LanguageMaker:tm: by Erwin de Vries_, dans les fichiers de [Amsterdam Taxi Madness](https://www.myabandonware.com/game/amsterdam-taxi-madness-gsj). Il peut convertir un fichier DCL en TXT et inversement juste en glissant un fichier dessus !
+_(Note : la plupart des fichiers de ce jeu sont cachés dans un fichier `data.dcp`, mais c'est juste une archive ZIP. Il est possible de l'ouvrir et de la modifier avec 7-Zip.)_
+
+On découvre alors que ce fichier **contient les missions du jeu** avec tous leurs paramètres, comme la quantité de trafic et le temps imparti... le fameux _mission editor_ n'existait pas encore à ce moment-là, il n'y a d'ailleurs pas de dossier `Scripts` dans ce jeu.
+
+La plupart des jeux Team 6 plus récents que Amsterdam Taxi Madness utilisent une variante de ce format (qui a été à priori juste assez modifié pour supporter les accents). C'est ici que _LanguageDemaker:tm: by maddie480_ rentre en jeu.
+A force de générer des fichiers DCL au pif avec LanguageMaker, j'ai fini par comprendre le format, et à faire les adaptations pour décoder/encoder ces fichiers pour d'autres jeux Team 6 comme Pizza Dude et Manhattan Chase. :stuck_out_tongue:
+
+Ce programme est dans le dossier `LanguageDemaker-src`, et les pipelines GitHub se feront un plaisir de le compiler et de l'exécuter pour une collection de fichiers de langue de jeux Team 6.

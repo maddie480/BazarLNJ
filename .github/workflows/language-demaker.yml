@@ -1,0 +1,57 @@
+name: Build and run LanguageDemaker (tm)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'adopt'
+
+    - name: Build
+      run: |
+        cd Team6/LanguageDemaker-src
+        javac ovh/maddie480/*.java
+        rm ovh/maddie480/*.java
+        mkdir out
+        mv ovh out
+
+    - name: Upload compiled sources as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Team6LanguageDemaker
+        path: Team6/LanguageDemaker-src/out
+
+    - name: Run
+      run: |
+        cd Team6/LanguageDemaker-src
+        for file in `ls -1 langfiles`; do
+          dest=`echo -n $file | sed s/DCL/txt/`
+          java -cp out ovh.maddie480.LanguageDemaker langfiles/$file langfiles/$dest
+
+          # Converting the other way around should result in the same file
+          java -cp out ovh.maddie480.LanguageRemaker langfiles/$dest langfiles/remake.dcl
+          if ! cmp -s langfiles/$file langfiles/remake.dcl; then
+            exit 1
+          fi
+
+          # cleanup
+          rm langfiles/remake.dcl langfiles/$file
+        done
+
+    - name: Upload converted files as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Team6ConvertedLanguageFiles
+        path: Team6/LanguageDemaker-src/langfiles
