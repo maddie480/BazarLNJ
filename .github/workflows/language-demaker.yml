@@ -21,8 +21,8 @@ jobs:
 
     - name: Build
       run: |
-        cd Team6/LanguageDemaker-src
-        javac ovh/maddie480/*.java
+        cd Team6/AssetConverter-src
+        javac ovh/maddie480/Language*.java
         rm ovh/maddie480/*.java
         mkdir out
         mv ovh out
@@ -31,11 +31,11 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Team6LanguageDemaker
-        path: Team6/LanguageDemaker-src/out
+        path: Team6/AssetConverter-src/out
 
     - name: Run
       run: |
-        cd Team6/LanguageDemaker-src
+        cd Team6/AssetConverter-src
         for file in `ls -1 langfiles`; do
           dest=`echo -n $file | sed s/DCL/txt/`
           java -cp out ovh.maddie480.LanguageDemaker langfiles/$file langfiles/$dest
@@ -54,4 +54,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Team6ConvertedLanguageFiles
-        path: Team6/LanguageDemaker-src/langfiles
+        path: Team6/AssetConverter-src/langfiles

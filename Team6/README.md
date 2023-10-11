@@ -92,4 +92,4 @@ On découvre alors que ce fichier **contient les missions du jeu** avec tous leu
 La plupart des jeux Team 6 plus récents que Amsterdam Taxi Madness utilisent une variante de ce format (qui a été à priori juste assez modifié pour supporter les accents). C'est ici que _LanguageDemaker:tm: by maddie480_ rentre en jeu.
 A force de générer des fichiers DCL au pif avec LanguageMaker, j'ai fini par comprendre le format, et à faire les adaptations pour décoder/encoder ces fichiers pour d'autres jeux Team 6 comme Pizza Dude et Manhattan Chase. :stuck_out_tongue:
 
-Ce programme est dans le dossier `LanguageDemaker-src`, et les pipelines GitHub se feront un plaisir de le compiler et de l'exécuter pour une collection de fichiers de langue de jeux Team 6.
+Ce programme est dans le dossier `AssetConverter-src`, et les pipelines GitHub se feront un plaisir de le compiler et de l'exécuter pour une collection de fichiers de langue de jeux Team 6.

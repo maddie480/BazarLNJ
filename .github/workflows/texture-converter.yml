@@ -1,0 +1,48 @@
+name: Build and run Team 6 Texture Converter
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'adopt'
+
+    - name: Build
+      run: |
+        cd Team6/AssetConverter-src
+        javac ovh/maddie480/Texture*.java
+        rm ovh/maddie480/*.java
+        mkdir out
+        mv ovh out
+
+    - name: Upload compiled sources as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Team6TextureConverter
+        path: Team6/AssetConverter-src/out
+
+    - name: Run
+      env:
+        PIZZA_DUDE_SRC: ${{ secrets.PIZZA_DUDE_SRC }}
+      run: |
+        curl -o PizzaDude.zip $PIZZA_DUDE_SRC
+        unzip PizzaDude.zip
+        java -cp Team6/AssetConverter-src/out ovh.maddie480.TextureDecoder "Pizza Dude" converter_output
+
+    - name: Upload converted files as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PizzaDudeConvertedTextures
+        path: converter_output
