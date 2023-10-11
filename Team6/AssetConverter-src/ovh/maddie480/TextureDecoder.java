@@ -76,7 +76,10 @@ public class TextureDecoder {
     private static void readBitmap(InputStream is, BufferedImage image, boolean hasAlpha) throws IOException {
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
-                Color c = new Color(is.read(), is.read(), is.read(), hasAlpha ? is.read() : 255);
+                int b = is.read();
+                int g = is.read();
+                int r = is.read();
+                Color c = new Color(r, g, b, hasAlpha ? is.read() : 255);
                 image.setRGB(x, y, c.getRGB());
             }
         }

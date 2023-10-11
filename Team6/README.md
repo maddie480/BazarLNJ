@@ -93,3 +93,14 @@ La plupart des jeux Team 6 plus récents que Amsterdam Taxi Madness utilisent un
 A force de générer des fichiers DCL au pif avec LanguageMaker, j'ai fini par comprendre le format, et à faire les adaptations pour décoder/encoder ces fichiers pour d'autres jeux Team 6 comme Pizza Dude et Manhattan Chase. :stuck_out_tongue:
 
 Ce programme est dans le dossier `AssetConverter-src`, et les pipelines GitHub se feront un plaisir de le compiler et de l'exécuter pour une collection de fichiers de langue de jeux Team 6.
+
+## Les textures
+
+Après moult expériences, le format DCT utilisé pour les textures du jeu a été déchiffré : selon les textures, il peut s'agir
+- de bitmaps 24 bits, sans transparence
+- de bitmaps 32 bits, avec transparence
+- d'un format étrange où chaque carré de 4x4 est représenté par 8 octets : deux couleurs sur 16 bits chacune (RGB 5-6-5) et les 4 autres octets qui choisissent la couleur de chacun des 16 pixels du carré entre ces 2 couleurs et un mélange des deux. Donc, chaque pixel est représenté par _deux_ bits. Ce qui fait 4 couleurs possibles. Donc oui, dans ce format, il ne peut pas y avoir plus de 4 couleurs dans un carré de 4x4.
+- du même format étrange, mais avec 8 octets en plus qui donnent la transparence des 16 pixels du carré (4 bits par pixel, donc 16 valeurs possibles). La transparence est plus précise que la couleur, donc.
+
+Des programmes ont été écrits pour décoder ces 4 formats de textures et les enregistrer au format PNG, et pouvoir encoder des textures dans le format bitmap 32 bits _depuis_ un fichier PNG.
+Ces programmes sont dans le dossier `AssetConverter-src`, et les pipelines GitHub se feront un plaisir de le compiler et de l'exécuter pour décoder les textures de Pizza Dude.
