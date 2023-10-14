@@ -104,3 +104,5 @@ Après moult expériences, le format DCT utilisé pour les textures du jeu a ét
 
 Des programmes ont été écrits pour décoder ces 4 formats de textures et les enregistrer au format PNG, et pouvoir encoder des textures dans le format bitmap 32 bits _depuis_ un fichier PNG.
 Ces programmes sont dans le dossier `AssetConverter-src`, et les pipelines GitHub se feront un plaisir de le compiler et de l'exécuter pour décoder les textures de Pizza Dude.
+
+Le dossier `tokentextures` contient de superbes textures de pièces réalisées par Jeanvik et Zekium, et la pipeline s'occupera de les convertir au format DCT pour pouvoir _mettre Chirac en 3D dans le jeu_.

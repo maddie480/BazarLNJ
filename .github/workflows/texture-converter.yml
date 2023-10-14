@@ -41,8 +41,21 @@ jobs:
         unzip PizzaDude.zip
         java -cp Team6/AssetConverter-src/out ovh.maddie480.TextureDecoder "Pizza Dude" converter_output
 
+        for file in `ls -1 Team6/AssetConverter-src/tokentextures`; do
+          dir=textures/`echo -n $file | sed s/.png//`/Misc/DF/cache/data/2666-1-1
+          mkdir -p $dir
+          java -cp Team6/AssetConverter-src/out ovh.maddie480.TextureEncoder Team6/AssetConverter-src/tokentextures/$file $dir/Money_1.DCT
+          java -cp Team6/AssetConverter-src/out ovh.maddie480.TextureEncoder Team6/AssetConverter-src/tokentextures/$file $dir/Money_1_s.DCT
+        done
+
     - name: Upload converted files as artifact
       uses: actions/upload-artifact@v3
       with:
         name: PizzaDudeConvertedTextures
         path: converter_output
+
+    - name: Upload token textures as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PizzaDudeTokenTextures
+        path: textures
