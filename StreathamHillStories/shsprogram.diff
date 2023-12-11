@@ -1,0 +1,85 @@
+diff --git a/Main/shsprogram.wdl b/Main/shsprogram.wdl
+index 221bdb2..f843c50 100755
+--- a/Main/shsprogram.wdl
++++ b/Main/shsprogram.wdl
+@@ -313,7 +313,27 @@ function ZombieSPspawn()
+               wait(1);
+    }                	
+ }
+-		
++
++var zombiego = off;
++
++function TheDayBefore(min, max)
++{
++    if (zombiego) { return; }
++    zombiego = on;
++
++    while(zombiego)
++    {
++        randomize();
++        wait(-random(max - min) - min);
++
++        ent_create("zombielow.mdl", plBiped01_entity.x, ZombieSPFunc);
++    }
++}
++
++function TheDayAfter()
++{
++	zombiego = off;
++}
+ 
+ 
+ 
+@@ -1140,6 +1160,38 @@ action simnon
+ 	  wait(1);
+ 	}
+ } 
++
++font console_font = "Courier New", 1, 24;
++
++string exec_buffer "                                                            ";
++
++text console_txt
++{
++    pos_x = 10;
++    pos_y = 10;
++    layer = 10;
++    font = console_font;
++    strings 1;
++    string exec_buffer;
++    flags = SHADOW | OUTLINE;
++}
++
++function console()
++{
++    if(console_txt.visible == on) { return; } //already running
++    console_txt.visible = on;
++
++    inkey(exec_buffer);
++
++    if(result == 13)
++    {
++      execute(exec_buffer);
++    }
++
++    console_txt.visible = off;
++}
++
++
+   
+ function controllerpause()
+ {
+@@ -1151,6 +1203,12 @@ function controllerpause()
+      if(plBipedInput01_qJoystick == 1) && (joy_10 == on) { pause();GamePaused = 1; wait(1);}
+      
+      if(key_p == on) {pause();GamePaused = 1; wait(1);}
++
++    if(key_pressed(41) == 1)
++    {
++      while(key_any == 1){wait(1);}
++      console();
++    }
+      
+      if(hour_day == 20 && minutes_day == 1)
+      {
