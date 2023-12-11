@@ -1,5 +1,5 @@
 diff --git a/Main/shsprogram.wdl b/Main/shsprogram.wdl
-index 221bdb2..f843c50 100755
+index 221bdb2..d064ff1 100755
 --- a/Main/shsprogram.wdl
 +++ b/Main/shsprogram.wdl
 @@ -313,7 +313,27 @@ function ZombieSPspawn()
@@ -83,3 +83,13 @@ index 221bdb2..f843c50 100755
       
       if(hour_day == 20 && minutes_day == 1)
       {
+@@ -1846,6 +1904,9 @@ action physics_box
+ 
+ }
+ 
++function ClioInYourFace() {
++    ent_create("Clio.mdl", plBiped01_entity.x, car_path);
++}
+ 
+ 
+ 

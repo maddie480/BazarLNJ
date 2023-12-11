@@ -110,5 +110,6 @@ Quelques commandes notables :
 - `christmas = 1` / `halloween = 1` - active les effets de Noël / Halloween (au moins partiellement)
 - `TheDayBefore(min, max)` - fait spawn des zombies à intervalle aléatoire de `min` à `max` secondes, comme le mode Halloween du jeu
 - `TheDayAfter()` - arrête de faire spawn des zombies
+- `ClioInYourFace()` - fait spawn une Clio invisible à la même position que le personnage, et il est possible de monter dedans pour partir dans l'espaaaaace
 
-... bon ok, il est possible que les 2 dernières commandes fassent partie du patch. :stuck_out_tongue:
+... bon ok, il est possible que les 3 dernières commandes fassent partie du patch. :stuck_out_tongue:
