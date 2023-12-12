@@ -93,7 +93,7 @@ La méthode renvoie 1 quel que soit le hash (sauf 0, mais bon hein).
 Et pour finir, il faut faire sauter une protection que le moteur du jeu a contre la modification de son propre code... mais heureusement, GameStudio a une option de ligne de commande pour ça : `-nc`.
 
 **En résumé :**
-- modifier `Main/acknex.dll` pour changer l'octet à la position `0x25FCA` de `74` à `EB`
+- modifier `Main/acknex.dll` pour changer l'octet à la position `0x2F5CA` de `74` à `EB`
 - faire un raccourci vers `Main/shsprogram.exe` avec les options `-nx60 -diag -nc`
 
 Et pouf, vous pouvez maintenant modifier les fichiers `.wdl` du jeu pour changer son code.
@@ -108,8 +108,9 @@ Quelques commandes notables :
 - `ph_setgravity(0, 0, -386))` - changer la gravité du monde (-386 étant celle par défaut, visiblement)
 - `bipedPhy01_gravity = 10` - changer la gravité des piétons (10 étant celle par défaut)
 - `christmas = 1` / `halloween = 1` - active les effets de Noël / Halloween (au moins partiellement)
+
+Et voici quelques commandes ajoutées par le patch, pour activer certaines fonctions du jeu plus facilement :
 - `TheDayBefore(min, max)` - fait spawn des zombies à intervalle aléatoire de `min` à `max` secondes, comme le mode Halloween du jeu
 - `TheDayAfter()` - arrête de faire spawn des zombies
 - `ClioInYourFace()` - fait spawn une Clio invisible à la même position que le personnage, et il est possible de monter dedans pour partir dans l'espaaaaace
-
-... bon ok, il est possible que les 3 dernières commandes fassent partie du patch. :stuck_out_tongue:
+- `EnterBowling()` / `ExitBowling()` / `EnterCaesars()` / `ExitCaesars()` - entre et sort de 2 lieux qui ne semblent pas avoir été implémentés (mais on a quand même le son)

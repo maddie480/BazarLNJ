@@ -1,5 +1,5 @@
 diff --git a/Main/shsprogram.wdl b/Main/shsprogram.wdl
-index 221bdb2..d064ff1 100755
+index 221bdb2..def5ff5 100755
 --- a/Main/shsprogram.wdl
 +++ b/Main/shsprogram.wdl
 @@ -313,7 +313,27 @@ function ZombieSPspawn()
@@ -83,7 +83,7 @@ index 221bdb2..d064ff1 100755
       
       if(hour_day == 20 && minutes_day == 1)
       {
-@@ -1846,6 +1904,9 @@ action physics_box
+@@ -1846,8 +1904,22 @@ action physics_box
  
  }
  
@@ -91,5 +91,19 @@ index 221bdb2..d064ff1 100755
 +    ent_create("Clio.mdl", plBiped01_entity.x, car_path);
 +}
  
+-
++function EnterBowling() {
++    ent_create(NULL, plBiped01_entity.x, Bowling_entry);
++}
++function ExitBowling() {
++    ent_create(NULL, plBiped01_entity.x, Bowling_exit);
++}
++function EnterCaesars() {
++    ent_create(NULL, plBiped01_entity.x, caesars_entry);
++}
++function ExitCaesars() {
++    ent_create(NULL, plBiped01_entity.x, caesars_exit);
++}
  
  
+ // Desc: this is the function used to restart the game.
