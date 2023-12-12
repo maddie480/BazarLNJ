@@ -1,5 +1,18 @@
+diff --git a/Main/bicycle.wdl b/Main/bicycle.wdl
+index bcc2d4c..9f5a2e5 100755
+--- a/Main/bicycle.wdl
++++ b/Main/bicycle.wdl
+@@ -55,7 +55,7 @@ function chain_sound()
+ 
+ function bicycle_drive()
+ {
+-	return;
++	// return;
+ 	while (bicycle_entity._old_entity_handle == plSelect_curr_model) { wait(1); }
+ 		if((YOU == plBiped01_entity) && (plSelect_curr_model != bicycle_entity))
+ 	{
 diff --git a/Main/shsprogram.wdl b/Main/shsprogram.wdl
-index 221bdb2..def5ff5 100755
+index 221bdb2..0bb7762 100755
 --- a/Main/shsprogram.wdl
 +++ b/Main/shsprogram.wdl
 @@ -313,7 +313,27 @@ function ZombieSPspawn()
@@ -83,15 +96,17 @@ index 221bdb2..def5ff5 100755
       
       if(hour_day == 20 && minutes_day == 1)
       {
-@@ -1846,8 +1904,22 @@ action physics_box
+@@ -1846,8 +1904,29 @@ action physics_box
  
  }
  
 +function ClioInYourFace() {
 +    ent_create("Clio.mdl", plBiped01_entity.x, car_path);
 +}
++function SpawnR8() {
++    ent_create("AudiR8.mdl", plBiped01_entity.x, car_path);
++}
  
--
 +function EnterBowling() {
 +    ent_create(NULL, plBiped01_entity.x, Bowling_entry);
 +}
@@ -103,6 +118,10 @@ index 221bdb2..def5ff5 100755
 +}
 +function ExitCaesars() {
 +    ent_create(NULL, plBiped01_entity.x, caesars_exit);
++}
+ 
++function SpawnBicycle() {
++    ent_create("AudiR8.mdl", plBiped01_entity.x, bicycle);
 +}
  
  

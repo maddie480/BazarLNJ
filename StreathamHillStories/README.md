@@ -113,4 +113,6 @@ Et voici quelques commandes ajoutées par le patch, pour activer certaines fonct
 - `TheDayBefore(min, max)` - fait spawn des zombies à intervalle aléatoire de `min` à `max` secondes, comme le mode Halloween du jeu
 - `TheDayAfter()` - arrête de faire spawn des zombies
 - `ClioInYourFace()` - fait spawn une Clio invisible à la même position que le personnage, et il est possible de monter dedans pour partir dans l'espaaaaace
+- `SpawnR8()` - fait spawn une Audi R8 miniature, qui va tenter maladroitement de s'insérer dans le trafic
 - `EnterBowling()` / `ExitBowling()` / `EnterCaesars()` / `ExitCaesars()` - entre et sort de 2 lieux qui ne semblent pas avoir été implémentés (mais on a quand même le son)
+- `SpawnBicycle()` - fait spawn ce qu'il reste d'un vélo dans le code du jeu, avec le modèle d'une Audi R8 (parce que le modèle du vélo fait planter le jeu)
