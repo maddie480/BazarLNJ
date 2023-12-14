@@ -108,6 +108,7 @@ Quelques commandes notables :
 - `ph_setgravity(0, 0, -386))` - changer la gravité du monde (-386 étant celle par défaut, visiblement)
 - `bipedPhy01_gravity = 10` - changer la gravité des piétons (10 étant celle par défaut)
 - `christmas = 1` / `halloween = 1` - active les effets de Noël / Halloween (au moins partiellement)
+- `Poo_show()` - le jeu fait caca sur ton écran. Oui, t'es censé pouvoir faire caca sur les autres joueurs si tu joues l'oiseau en multi. C'est une feature.
 
 Et voici quelques commandes ajoutées par le patch, pour activer certaines fonctions du jeu plus facilement :
 - `TheDayBefore(min, max)` - fait spawn des zombies à intervalle aléatoire de `min` à `max` secondes, comme le mode Halloween du jeu
