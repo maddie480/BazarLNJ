@@ -32,7 +32,7 @@ jobs:
         java -cp PsychoKiller/MediaConverter-src ovh.maddie480.MediaConverter
 
     - name: Upload converted assets as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: PsychoKillerAssets
         path: output
