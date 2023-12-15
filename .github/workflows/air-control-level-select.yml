@@ -20,7 +20,7 @@ jobs:
       run: cd AirControl/LevelSelect-src && msbuild *.sln "/p:Configuration=Release"
 
     - name: Upload build as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: AirControlLevelSelect
         path: AirControl/LevelSelect-src/bin/Release/net452
