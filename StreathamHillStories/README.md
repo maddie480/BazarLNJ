@@ -27,7 +27,7 @@ Et oui, il est possible de sélectionner plusieurs options à la fois.
 A noter qu'il est possible de modifier la résolution du menu, en éditant `DisplayMenu.txt`, qui a le même format que `Main/DisplayConfig.txt`.
 
 Autres options qui sont uniquement mentionnées sur [le site d'aide du jeu](http://streathamhillstories.com/help.htm) :
-- dans `Main/Controller.txt`, écrire 0 désactivera la manette, 1 configurera une manette générique, et 3 une manette de Xbox. Si si, c'est une feature.
+- dans `Main/Controller.txt`, écrire 0 désactivera la manette, 1 configurera une manette générique, et 3 une manette de Xbox. Si si, c'est une feature. **Il est recommandé de mettre 0 dans `Main/Controller.txt` si tu n'utilises pas de manette**, parce qu'il semblerait que certaines fonctions du jeu vérifient les boutons de la manette ... même s'il n'y en a aucune de branchée. Ce qui peut poser quelques soucis.
 - dans `Main/PlayerName.txt`, tu peux personnaliser ton pseudo pour le online du jeu.
 
 Attention, lorsque plusieurs options sont sélectionnées à la fois, comme dans le screenshot, le jeu va écrire plusieurs valeurs dans `Main/GameSettings.txt`. Ici, la distance d'affichage est 2 et 3 à la fois, le frame limiter est 0 et 1 à la fois, et la qualité est à 3, donc le jeu va écrire : `2 3 1 0 3`. Et au moment de relire le fichier, il va lire : "distance d'affichage = 2, frame limiter = 3, qualité = 1", ce qui donne ... ça.

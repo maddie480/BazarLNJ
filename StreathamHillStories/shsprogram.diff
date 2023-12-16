@@ -12,7 +12,7 @@ index bcc2d4c..9f5a2e5 100755
  		if((YOU == plBiped01_entity) && (plSelect_curr_model != bicycle_entity))
  	{
 diff --git a/Main/shsprogram.wdl b/Main/shsprogram.wdl
-index 221bdb2..0bb7762 100755
+index 221bdb2..a7d6a61 100755
 --- a/Main/shsprogram.wdl
 +++ b/Main/shsprogram.wdl
 @@ -313,7 +313,27 @@ function ZombieSPspawn()
@@ -83,20 +83,19 @@ index 221bdb2..0bb7762 100755
    
  function controllerpause()
  {
-@@ -1151,6 +1203,12 @@ function controllerpause()
+@@ -1151,6 +1203,11 @@ function controllerpause()
       if(plBipedInput01_qJoystick == 1) && (joy_10 == on) { pause();GamePaused = 1; wait(1);}
       
       if(key_p == on) {pause();GamePaused = 1; wait(1);}
 +
 +    if(key_pressed(41) == 1)
 +    {
-+      while(key_any == 1){wait(1);}
 +      console();
 +    }
       
       if(hour_day == 20 && minutes_day == 1)
       {
-@@ -1846,8 +1904,29 @@ action physics_box
+@@ -1846,8 +1903,29 @@ action physics_box
  
  }
  
