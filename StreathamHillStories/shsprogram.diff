@@ -125,3 +125,107 @@ index 221bdb2..a7d6a61 100755
  
  
  // Desc: this is the function used to restart the game.
+diff --git a/Main/startupSHS.wdl b/Main/startupSHS.wdl
+index 168f35e..e2a2b5a 100755
+--- a/Main/startupSHS.wdl
++++ b/Main/startupSHS.wdl
+@@ -159,7 +159,21 @@
+        
+      }  
+ 	  
+-	  
++        if (str_stri(command_str,"--christmas")){
++            Halloween = 0;
++            Christmas = 1;
++        }
++        if (str_stri(command_str,"--halloween")){
++            Halloween = 1;
++            Christmas = 0;
++        }
++        if (str_stri(command_str,"--normal")){
++            Halloween = 0;
++            Christmas = 0;
++        }
++
++        diag_var("\n[Maddie] Halloween = %.0f", Halloween);
++        diag_var(", Christmas = %.0f", Christmas);
+ 
+ 		//   	
+ 
+diff --git a/shstories.wdl b/shstories.wdl
+index b27bb77..f3ed294 100755
+--- a/shstories.wdl
++++ b/shstories.wdl
+@@ -38,6 +38,10 @@ var trialhandle;
+ define sendkill, skill88;
+ 
+ var Multiplayer; // 0-off 1-client 2-server
++string* forcedMode;
++
++// déclarer des string* en-dehors des méthodes a l'air de mieux marcher et je comprends rien à ce langage donc voilà
++string* command;
+ 
+ 
+ ////////////////////////////////////////////////////////////////////////////////// START-UP///////////////////////////////////////////////////////////////////////////////
+@@ -904,6 +908,30 @@ bmap hnight_map = <Hallownight.png>;
+       		
+       	}
+       }
++
++        forcedMode = "";
++        if (str_stri(command_str,"--christmas")){
++            Halloween = 0;
++            Christmas = 1;
++            forcedMode = " --christmas";
++        }
++        if (str_stri(command_str,"--halloween")){
++            Halloween = 1;
++            Christmas = 0;
++            forcedMode = " --halloween";
++        }
++        if (str_stri(command_str,"--normal")){
++            Halloween = 0;
++            Christmas = 0;
++            forcedMode = " --normal";
++        }
++
++        diag_var("\n[Maddie] Halloween = %.0f", Halloween);
++        diag_var(", Christmas = %.0f", Christmas);
++        diag(", forcedMode = \"");
++        diag(forcedMode);
++        diag("\"");
++
+ 	      
+ 		   //wait(-30);
+ 		    if(safemode == 0)
+@@ -2986,21 +3014,16 @@ bmap hnight_map = <Hallownight.png>;
+ 		loading_pan.visible = on;
+ 		ScreenChooser();
+ 		LoadingScreens();
+-		wait(-3);
+-		
+-		if(Multiplayer == 1) 
+-		{
+ 		
+-		
+-	
+-		  exec(null, "Main\\SHSprogram.exe /b -nx60 -cl -diag");
+-	
+-	   }
+-		if(Multiplayer == 0)
+-		{
+-	
+-		exec(null, "Main\\SHSprogram.exe /b -nx60 -diag");
+-	   }
++        command = "Main\\SHSprogram.exe /b -nx60 -diag -nc";
++        str_cat(command, forcedMode);
++        if(Multiplayer == 1) {
++            str_cat(command, " -cl");
++        }
++        diag("\n[Maddie] Running command: ");
++        diag(command);
++        wait(-3);
++        exec(null, command);
+ 	   
+ 	   
+ 		//  play_menu_music();

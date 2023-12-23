@@ -93,10 +93,19 @@ La méthode renvoie 1 quel que soit le hash (sauf 0, mais bon hein).
 Et pour finir, il faut faire sauter une protection que le moteur du jeu a contre la modification de son propre code... mais heureusement, GameStudio a une option de ligne de commande pour ça : `-nc`.
 
 **En résumé :**
-- modifier `Main/acknex.dll` pour changer l'octet à la position `0x2F5CA` de `74` à `EB`
+- modifier `acknex.dll` et `Main/acknex.dll` pour changer l'octet à la position `0x2F5CA` de `74` à `EB`
 - faire un raccourci vers `Main/shsprogram.exe` avec les options `-nx60 -diag -nc`
 
 Et pouf, vous pouvez maintenant modifier les fichiers `.wdl` du jeu pour changer son code.
+
+## Les paramètres de ligne de commande
+
+En plus de `-nx60 -diag -nc`, il est possible de rajouter :
+- `-cl` : pour lancer le jeu en multi
+  - Pour modifier son pseudo, il faut éditer `Main/PlayerName.txt`. C'est la façon _officielle_ de le faire.
+- `-sv` : pour lancer un _serveur_ en multi. Nécessite d'ouvrir le port 2300 en UDP à Internet, et de remplacer `-nx60` par `-nx600`
+  - Les clients peuvent choisir leur serveur en modifiant `Main/Server.txt`. Le serveur par défaut est : `188.227.170.116`
+- `--christmas` / `--halloween` / `--normal` (ajoutées par le patch) : force le jeu à se lancer en mode Halloween / Noël / normal, même si la date du système ne correspond pas aux critères
 
 ## La console
 
@@ -107,9 +116,9 @@ Ensuite, en appuyant sur ², la console s'ouvre en haut à gauche et permet d'ex
 Quelques commandes notables :
 - `ph_setgravity(0, 0, -386))` - changer la gravité du monde (-386 étant celle par défaut, visiblement)
 - `bipedPhy01_gravity = 10` - changer la gravité des piétons (10 étant celle par défaut)
-- `christmas = 1` / `halloween = 1` - active les effets de Noël / Halloween (au moins partiellement)
 - `Poo_show()` - le jeu fait caca sur ton écran. Oui, t'es censé pouvoir faire caca sur les autres joueurs si tu joues l'oiseau en multi. C'est une feature.
 - `ent_morph(plBiped01_entity, "xxx.mdl")` - transformer son personnage en solo en (une version miniature de) l'un des personnages du multi : `Pedestrian02`, `FbiAgentMP`, `jessica`, `MainPlayerMP`, `walkwomen1`, `walkwomen2MP`, `john`, `Pedestrian03`, `simon`, `ToniMP`
+- `maybe_snow()` : il va neiger. Peut-être. (40% de chances pour être exacte)
 
 Et voici quelques commandes ajoutées par le patch, pour activer certaines fonctions du jeu plus facilement :
 - `TheDayBefore(min, max)` - fait spawn des zombies à intervalle aléatoire de `min` à `max` secondes, comme le mode Halloween du jeu
