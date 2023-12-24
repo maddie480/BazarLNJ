@@ -106,6 +106,9 @@ En plus de `-nx60 -diag -nc`, il est possible de rajouter :
 - `-sv` : pour lancer un _serveur_ en multi. Nécessite d'ouvrir le port 2300 en UDP à Internet, et de remplacer `-nx60` par `-nx600`
   - Les clients peuvent choisir leur serveur en modifiant `Main/Server.txt`. Le serveur par défaut est : `188.227.170.116`
 - `--christmas` / `--halloween` / `--normal` (ajoutées par le patch) : force le jeu à se lancer en mode Halloween / Noël / normal, même si la date du système ne correspond pas aux critères
+- `--trial` (ajoutée par le patch) : comme indiqué sur [le blog du jeu](http://streathamhillstories.com/blog), une version d'essai a été rendue disponible du 28 au 31 août 2020, le temps d'un week-end... et il reste du code datant de cette démo, qui peut être réactivé avec ce paramètre.
+  - Si le jeu était lancé en-dehors de l'intervalle autorisé (du 28 au 31 août inclus), il était bloqué de manière permanente en écrivant `1` dans le fichier `Main/Timer.z`. (Oui, c'est un fichier de type z.) Donc, changer la date du PC ne suffisait pas à pouvoir rejouer au jeu, il fallait aussi remettre `0` dans `Main/Timer.z`.
+  - Maintenant, ce code a été désactivé (en le commentant) et heureusement, parce qu'il est directement livré avec un fichier `Main/Timer.z` qui contient `1` :sweat_smile:
 
 ## La console
 
