@@ -29,7 +29,7 @@ function md_get_command_to_run_main_game(forcedMode) {
     var command;
     command = str_create("Main\\SHSprogram.exe /b -nx60 -diag -nc");
     str_cat(command, forcedMode);
-    if(Multiplayer == 1) {
+    if (Multiplayer == 1) {
         str_cat(command, " -cl");
     }
     diag("\n[Maddie] Running command: ");
