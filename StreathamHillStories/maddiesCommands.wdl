@@ -31,7 +31,7 @@ function md_console() {
 
 function md_console_listener() {
     while (1) {
-        if(key_pressed(41) == 1) { md_console(); } // ² key on AZERTY
+        if (key_pressed(41) == 1) { md_console(); } // ² key on AZERTY
         wait(1); // 1 frame
     }
 }
