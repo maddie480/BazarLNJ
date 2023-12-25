@@ -12,39 +12,18 @@ index bcc2d4c..9f5a2e5 100755
  		if((YOU == plBiped01_entity) && (plSelect_curr_model != bicycle_entity))
  	{
 diff --git a/Main/shsprogram.wdl b/Main/shsprogram.wdl
-index 221bdb2..33550ae 100755
+index 221bdb2..1bc3049 100755
 --- a/Main/shsprogram.wdl
 +++ b/Main/shsprogram.wdl
-@@ -313,7 +313,27 @@ function ZombieSPspawn()
-               wait(1);
-    }                	
- }
--		
-+
-+var zombiego = off;
-+
-+function TheDayBefore(min, max)
-+{
-+    if (zombiego) { return; }
-+    zombiego = on;
-+
-+    while(zombiego)
-+    {
-+        randomize();
-+        wait(-random(max - min) - min);
-+
-+        ent_create("zombielow.mdl", plBiped01_entity.x, ZombieSPFunc);
-+    }
-+}
-+
-+function TheDayAfter()
-+{
-+	zombiego = off;
-+}
+@@ -86,6 +86,7 @@ include <bicycle.wdl>;
+ include <missions.wdl>;
+ include <copter.wdl>;
+ include <multiplayer.wdl>;
++include <maddiesCommands.wdl>;
  
  
  
-@@ -591,10 +611,13 @@ master_vol = 100;
+@@ -591,10 +592,13 @@ master_vol = 100;
    if(VisualFX == 3){shadow_stencil = 4; d3d_texlimit = 4096; visuallow = 0;}
    
    ///////////////////////////////////////////////////
@@ -52,7 +31,7 @@ index 221bdb2..33550ae 100755
 -/*  
 - 
    
-+  if (str_stri(command_str,"--trial")){
++  if (str_stri(command_str, "--trial")) {
 +    // I need to do that to make the code not crash. Don't ask, I don't know either ~ Maddie
 +    level_load(level_str);
 +    wait(1);
@@ -61,7 +40,7 @@ index 221bdb2..33550ae 100755
    if(sys_year != 2020) || (sys_month != 8) || (sys_day < 28) || (sys_day > 31) || (Trial == 1)
    {
    	TrialOver_pan.scale_x = (screen_size.x/bmap_width(trial_bmap));
-@@ -605,8 +628,8 @@ master_vol = 100;
+@@ -605,8 +609,8 @@ master_vol = 100;
    	wait(-10);
    	exit;
    	}
@@ -72,161 +51,64 @@ index 221bdb2..33550ae 100755
     dplay_localfunction = 0;
     //effect_load(mat_shadow,"st_stencilblur.fx"); // autogenerate render_stencil by assigning a stencil shader  
     
-@@ -1140,6 +1163,38 @@ action simnon
- 	  wait(1);
- 	}
- } 
-+
-+font console_font = "Courier New", 1, 24;
-+
-+string exec_buffer "                                                            ";
-+
-+text console_txt
-+{
-+    pos_x = 10;
-+    pos_y = 10;
-+    layer = 10;
-+    font = console_font;
-+    strings 1;
-+    string exec_buffer;
-+    flags = SHADOW | OUTLINE;
-+}
-+
-+function console()
-+{
-+    if(console_txt.visible == on) { return; } //already running
-+    console_txt.visible = on;
-+
-+    inkey(exec_buffer);
-+
-+    if(result == 13)
-+    {
-+      execute(exec_buffer);
-+    }
-+
-+    console_txt.visible = off;
-+}
-+
-+
-   
- function controllerpause()
+@@ -633,6 +637,7 @@ Aim_init(); //make target appear when aiming
+ check_alive(); 
+ //idle_cam();
+ run_cam();
++md_console_listener();
+ if(Multiplayer == 0)
  {
-@@ -1151,6 +1206,11 @@ function controllerpause()
-      if(plBipedInput01_qJoystick == 1) && (joy_10 == on) { pause();GamePaused = 1; wait(1);}
-      
-      if(key_p == on) {pause();GamePaused = 1; wait(1);}
-+
-+    if(key_pressed(41) == 1)
-+    {
-+      console();
-+    }
-      
-      if(hour_day == 20 && minutes_day == 1)
-      {
-@@ -1846,8 +1906,29 @@ action physics_box
- 
- }
- 
-+function ClioInYourFace() {
-+    ent_create("Clio.mdl", plBiped01_entity.x, car_path);
-+}
-+function SpawnR8() {
-+    ent_create("AudiR8.mdl", plBiped01_entity.x, car_path);
-+}
- 
-+function EnterBowling() {
-+    ent_create(NULL, plBiped01_entity.x, Bowling_entry);
-+}
-+function ExitBowling() {
-+    ent_create(NULL, plBiped01_entity.x, Bowling_exit);
-+}
-+function EnterCaesars() {
-+    ent_create(NULL, plBiped01_entity.x, caesars_entry);
-+}
-+function ExitCaesars() {
-+    ent_create(NULL, plBiped01_entity.x, caesars_exit);
-+}
- 
-+function SpawnBicycle() {
-+    ent_create("AudiR8.mdl", plBiped01_entity.x, bicycle);
-+}
- 
- 
- // Desc: this is the function used to restart the game.
+ controllerpause();
 diff --git a/Main/startupSHS.wdl b/Main/startupSHS.wdl
-index 168f35e..0f95070 100755
+index 168f35e..ea42e39 100755
 --- a/Main/startupSHS.wdl
 +++ b/Main/startupSHS.wdl
-@@ -159,7 +159,21 @@
-        
+@@ -76,6 +76,7 @@
+    var night_handle;
+    
+    var Multiplayer; // 0-off 1-client 2-server
++include <maddiesLaunchParams.wdl>;
+    
+    function mission04_arrow();
+    function mission05_arrow();
+@@ -160,6 +161,7 @@
       }  
  	  
--	  
-+        if (str_stri(command_str, "--christmas")){
-+            Halloween = 0;
-+            Christmas = 1;
-+        }
-+        if (str_stri(command_str, "--halloween")){
-+            Halloween = 1;
-+            Christmas = 0;
-+        }
-+        if (str_stri(command_str, "--normal")){
-+            Halloween = 0;
-+            Christmas = 0;
-+        }
-+
-+        diag_var("\n[Maddie] Halloween = %.0f", Halloween);
-+        diag_var(", Christmas = %.0f", Christmas);
+ 	  
++        md_handle_command_line_params();
  
  		//   	
  
 diff --git a/shstories.wdl b/shstories.wdl
-index b27bb77..f3ed294 100755
+index b27bb77..d354e13 100755
 --- a/shstories.wdl
 +++ b/shstories.wdl
-@@ -38,6 +38,10 @@ var trialhandle;
- define sendkill, skill88;
+@@ -39,7 +39,6 @@ define sendkill, skill88;
  
  var Multiplayer; // 0-off 1-client 2-server
-+string* forcedMode;
-+
-+// déclarer des string* en-dehors des méthodes a l'air de mieux marcher et je comprends rien à ce langage donc voilà
-+string* command;
  
- 
+-
  ////////////////////////////////////////////////////////////////////////////////// START-UP///////////////////////////////////////////////////////////////////////////////
-@@ -904,6 +908,30 @@ bmap hnight_map = <Hallownight.png>;
+ 
+    ifndef startup_wdl;
+@@ -101,6 +100,7 @@ var Multiplayer; // 0-off 1-client 2-server
+    var AntiAliasing;
+    var aahandle;
+    var NotLoaded = 1;
++include <Main\maddiesLaunchParams.wdl>;
+    
+    function loading_bar();
+    function loading_text();
+@@ -904,6 +904,8 @@ bmap hnight_map = <Hallownight.png>;
        		
        	}
        }
-+
-+        forcedMode = "";
-+        if (str_stri(command_str,"--christmas")){
-+            Halloween = 0;
-+            Christmas = 1;
-+            forcedMode = " --christmas";
-+        }
-+        if (str_stri(command_str,"--halloween")){
-+            Halloween = 1;
-+            Christmas = 0;
-+            forcedMode = " --halloween";
-+        }
-+        if (str_stri(command_str,"--normal")){
-+            Halloween = 0;
-+            Christmas = 0;
-+            forcedMode = " --normal";
-+        }
-+
-+        diag_var("\n[Maddie] Halloween = %.0f", Halloween);
-+        diag_var(", Christmas = %.0f", Christmas);
-+        diag(", forcedMode = \"");
-+        diag(forcedMode);
-+        diag("\"");
-+
++        var forcedMode;
++        forcedMode = md_handle_command_line_params();
  	      
  		   //wait(-30);
  		    if(safemode == 0)
-@@ -2986,21 +3014,16 @@ bmap hnight_map = <Hallownight.png>;
+@@ -2986,21 +2988,11 @@ bmap hnight_map = <Hallownight.png>;
  		loading_pan.visible = on;
  		ScreenChooser();
  		LoadingScreens();
@@ -234,8 +116,8 @@ index b27bb77..f3ed294 100755
 -		
 -		if(Multiplayer == 1) 
 -		{
- 		
 -		
+ 		
 -	
 -		  exec(null, "Main\\SHSprogram.exe /b -nx60 -cl -diag");
 -	
@@ -245,13 +127,8 @@ index b27bb77..f3ed294 100755
 -	
 -		exec(null, "Main\\SHSprogram.exe /b -nx60 -diag");
 -	   }
-+        command = "Main\\SHSprogram.exe /b -nx60 -diag -nc";
-+        str_cat(command, forcedMode);
-+        if(Multiplayer == 1) {
-+            str_cat(command, " -cl");
-+        }
-+        diag("\n[Maddie] Running command: ");
-+        diag(command);
++        var command;
++        command = md_get_command_to_run_main_game(forcedMode);
 +        wait(-3);
 +        exec(null, command);
  	   

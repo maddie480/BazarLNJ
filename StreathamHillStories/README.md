@@ -112,7 +112,7 @@ En plus de `-nx60 -diag -nc`, il est possible de rajouter :
 
 ## La console
 
-... Et du coup j'ai préparé un petit patch pour rajouter une console au jeu. Il est dans ce dossier, c'est `shsprogram.diff`. Il peut être appliqué au jeu en se mettant à la racine du jeu, et en faisant `git apply shsprogram.diff`.
+... Et du coup j'ai préparé un petit patch pour rajouter une console au jeu. Il est dans ce dossier, c'est `shsprogram.diff`. Il peut être appliqué au jeu en se mettant à la racine du jeu, et en faisant `git apply shsprogram.diff`. Il faudra aussi copier les fichiers `maddiesCommands.wdl` et `maddiesLaunchParams.wdl` dans le dossier `Main`.
 
 Ensuite, en appuyant sur ², la console s'ouvre en haut à gauche et permet d'exécuter du code arbitraire :sparkles:
 
@@ -120,13 +120,14 @@ Quelques commandes notables :
 - `ph_setgravity(0, 0, -386))` - changer la gravité du monde (-386 étant celle par défaut, visiblement)
 - `bipedPhy01_gravity = 10` - changer la gravité des piétons (10 étant celle par défaut)
 - `Poo_show()` - le jeu fait caca sur ton écran. Oui, t'es censé pouvoir faire caca sur les autres joueurs si tu joues l'oiseau en multi. C'est une feature.
-- `ent_morph(plBiped01_entity, "xxx.mdl")` - transformer son personnage en solo en (une version miniature de) l'un des personnages du multi : `Pedestrian02`, `FbiAgentMP`, `jessica`, `MainPlayerMP`, `walkwomen1`, `walkwomen2MP`, `john`, `Pedestrian03`, `simon`, `ToniMP`
 - `maybe_snow()` : il va neiger. Peut-être. (40% de chances pour être exacte)
 
 Et voici quelques commandes ajoutées par le patch, pour activer certaines fonctions du jeu plus facilement :
-- `TheDayBefore(min, max)` - fait spawn des zombies à intervalle aléatoire de `min` à `max` secondes, comme le mode Halloween du jeu
-- `TheDayAfter()` - arrête de faire spawn des zombies
-- `ClioInYourFace()` - fait spawn une Clio invisible à la même position que le personnage, et il est possible de monter dedans pour partir dans l'espaaaaace
-- `SpawnR8()` - fait spawn une Audi R8 miniature, qui va tenter maladroitement de s'insérer dans le trafic, et qui tourne _beaucoup_ trop vite
-- `EnterBowling()` / `ExitBowling()` / `EnterCaesars()` / `ExitCaesars()` - entre et sort de 2 lieux qui ne semblent pas avoir été implémentés (mais on a quand même le son)
-- `SpawnBicycle()` - fait spawn ce qu'il reste d'un vélo dans le code du jeu, avec le modèle d'une Audi R8 (parce que le modèle du vélo fait planter le jeu)
+- `md_the_day_before(min, max)` - fait spawn des zombies à intervalle aléatoire de `min` à `max` secondes, comme le mode Halloween du jeu
+- `md_the_day_after()` - arrête de faire spawn des zombies
+- `md_spawn_invisible_clio()` - fait spawn une Clio invisible à la même position que le personnage, et il est possible de monter dedans pour partir dans l'espaaaaace
+- `md_spawn_mini_r8()` - fait spawn une Audi R8 miniature, qui va tenter maladroitement de s'insérer dans le trafic, et qui tourne _beaucoup_ trop vite
+- `md_spawn_bicycle_r8()` - fait spawn ce qu'il reste d'un vélo dans le code du jeu, avec le modèle d'une Audi R8 (parce que le modèle du vélo est invisible, comme la Clio... :thinking:)
+- `md_enter_bowling()` / `md_exit_bowling()` / `md_enter_caesars()` / `md_exit_caesars()` - entre et sort de 2 lieux qui ne semblent pas avoir été implémentés (mais on a quand même le son)
+- `md_turn_into_xxx()` - te transforme en personnage du multi : remplacer `xxx` par `mainplayer`, `man1`, `woman1`, `woman2`, `woman3`, `woman1`, `fbiagent`, `jessica`, `john`, `simon`, `toni` ou `bikeman`
+- `md_get_out_of_the_ground()` - permet de se sortir du sol... il arrive souvent d'être coincé dans le sol après avoir utilisé `md_turn_into_xxx()`
