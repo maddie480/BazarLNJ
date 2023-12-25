@@ -14,8 +14,7 @@ text md_console_txt {
     flags = SHADOW | OUTLINE;
 }
 
-function md_console()
-{
+function md_console() {
     if (md_console_txt.visible == on) { return; } // already running
     md_console_txt.visible = on;
 
@@ -46,7 +45,7 @@ function md_the_day_before(min, max) {
     if (md_zombiego) { return; }
     md_zombiego = on;
 
-    while (1) {
+    while (md_zombiego) {
         randomize();
         wait(-random(max - min) - min);
 
@@ -131,7 +130,7 @@ function md_enter_place(actionName, placeNamePanel) {
 
     // You need to assign your pointer to a REAL pointer before you can use it. Go figure.
     md_panel_pointer = placeNamePanel;
-    while (md_panel_pointer.visible == on) { wait(1); }
+    while (md_panel_pointer.visible) { wait(1); }
     md_panel_pointer = NULL;
 
     ent_remove(teleporter);
