@@ -60,25 +60,48 @@ function md_the_day_after() {
 
 // == Shortcuts to spawn random stuff
 
-function md_spawn_invisible_clio() {
-    ent_create("Clio.mdl", plBiped01_entity.x, car_path);
+ENTITY* md_entity_holder;
+
+function md_scale_entity(entity, scale) {
+    md_entity_holder = entity;
+    md_entity_holder.scale_x = scale;
+    md_entity_holder.scale_y = scale;
+    md_entity_holder.scale_z = scale;
+    c_setminmax(md_entity_holder);
+    md_entity_holder = NULL;
 }
-function md_spawn_mini_r8() {
-    ent_create("AudiR8.mdl", plBiped01_entity.x, car_path);
+function md_paint_and_control() {
+    paint_AIcar();
+    car_path();
 }
-function md_spawn_bicycle_r8() {
-    ent_create("AudiR8.mdl", plBiped01_entity.x, bicycle);
+
+function md_spawn_clio() {
+    var clio;
+    clio = ent_create("Clio.mdl", plBiped01_entity.x, md_paint_and_control);
+    md_scale_entity(clio, 75);
+}
+function md_spawn_r8() {
+    var r8;
+    r8 = ent_create("AudiR8.mdl", plBiped01_entity.x, md_paint_and_control);
+    md_scale_entity(r8, 3);
+}
+function md_spawn_bicycle() {
+    var bike;
+    bike = ent_create("bicycle.mdl", plBiped01_entity.x, bicycle);
+    md_scale_entity(bike, 50);
 }
 
 
 // == Commands to become multiplayer characters
 
+function md_get_out_of_the_ground() {
+    plBiped01_entity.z += 200;
+}
+
 function md_turn_into_character(character) {
     ent_morph(plBiped01_entity, character);
-    plBiped01_entity.scale_x = 3;
-    plBiped01_entity.scale_y = 3;
-    plBiped01_entity.scale_z = 3;
-    plBiped01_entity.z += 200;
+    md_scale_entity(plBiped01_entity, 3);
+    md_get_out_of_the_ground();
 }
 
 function md_turn_into_mainplayer() {
@@ -115,14 +138,10 @@ function md_turn_into_bikeman() {
     md_turn_into_character("mpbikeman.mdl");
 }
 
-function md_get_out_of_the_ground() {
-    plBiped01_entity.z += 200;
-}
-
 
 // == Shortcuts to go to dummied out places
 
-panel* md_panel_pointer;
+PANEL* md_panel_pointer;
 
 function md_enter_place(actionName, placeNamePanel) {
     var teleporter;
