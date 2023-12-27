@@ -117,17 +117,22 @@ En plus de `-nx60 -diag -nc`, il est possible de rajouter :
 Ensuite, en appuyant sur ², la console s'ouvre en haut à gauche et permet d'exécuter du code arbitraire :sparkles:
 
 Quelques commandes notables :
-- `ph_setgravity(0, 0, -386))` - changer la gravité du monde (-386 étant celle par défaut, visiblement)
+- `ph_setgravity(0, 0, -386)` - changer la gravité du monde (-386 étant celle par défaut, visiblement)
 - `bipedPhy01_gravity = 10` - changer la gravité des piétons (10 étant celle par défaut)
 - `Poo_show()` - le jeu fait caca sur ton écran. Oui, t'es censé pouvoir faire caca sur les autres joueurs si tu joues l'oiseau en multi. C'est une feature.
 - `maybe_snow()` : il va neiger. Peut-être. (40% de chances pour être exacte)
 
 Et voici quelques commandes ajoutées par le patch, pour activer certaines fonctions du jeu plus facilement :
-- `md_the_day_before(min, max)` - fait spawn des zombies à intervalle aléatoire de `min` à `max` secondes, comme le mode Halloween du jeu
+- `md_the_day_before(min, max)` - fait spawn des zombies à intervalle aléatoire de `min` à `max` secondes (maximum 60 secondes), comme le mode Halloween du jeu
 - `md_the_day_after()` - arrête de faire spawn des zombies
-- `md_spawn_invisible_clio()` - fait spawn une Clio invisible à la même position que le personnage, et il est possible de monter dedans pour partir dans l'espaaaaace
-- `md_spawn_mini_r8()` - fait spawn une Audi R8 miniature, qui va tenter maladroitement de s'insérer dans le trafic, et qui tourne _beaucoup_ trop vite
-- `md_spawn_bicycle_r8()` - fait spawn ce qu'il reste d'un vélo dans le code du jeu, avec le modèle d'une Audi R8 (parce que le modèle du vélo est invisible, comme la Clio... :thinking:)
+- `md_spawn_zombie()` - fait apparaître 1 zombie, tout de suite
+- `md_spawn_r8()` - fait spawn une Audi R8, qui va tenter maladroitement de s'insérer dans le trafic, et qui tourne _beaucoup_ trop vite
+- `md_spawn_clio()` - fait spawn une Clio, qui a encore plus de soucis de physique que la R8 :boom:
+- `md_spawn_bicycle()` - fait spawn ce qu'il reste d'un vélo dans le code du jeu, ce qui a de grandes chances de planter
 - `md_enter_bowling()` / `md_exit_bowling()` / `md_enter_caesars()` / `md_exit_caesars()` - entre et sort de 2 lieux qui ne semblent pas avoir été implémentés (mais on a quand même le son)
 - `md_turn_into_xxx()` - te transforme en personnage du multi : remplacer `xxx` par `mainplayer`, `man1`, `woman1`, `woman2`, `woman3`, `woman1`, `fbiagent`, `jessica`, `john`, `simon`, `toni` ou `bikeman`
 - `md_get_out_of_the_ground()` - permet de se sortir du sol... il arrive souvent d'être coincé dans le sol après avoir utilisé `md_turn_into_xxx()`
+- `md_wanted_clear()` / `md_wanted_1star()` / `md_wanted_3stars()` / `md_wanted_5stars()` - modifie le niveau de recherche de la police
+- `md_setgravity(factor)` - modifie la gravité des véhicules et des piétons, 1 étant la valeur normale. Valeurs prédéfinies : `md_flipped_gravity()` = -1, `md_zero_gravity()` = 0, `md_low_gravity()` = 0.1, `md_normal_gravity()` = 1, `md_mega_gravity()` = 10
+- `md_poop_effect()` - fait caca sur ton écran, comme `Poo_show()`
+- `md_enable_rain()` / `md_disable_rain()` / `md_enable_snow()` / `md_disable_snow()` - fait neiger, ou pleuvoir... ou les deux.

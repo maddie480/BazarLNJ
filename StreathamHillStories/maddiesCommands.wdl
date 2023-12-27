@@ -36,10 +36,64 @@ function md_console_listener() {
     }
 }
 
+// == Since accessing fields of a struct requires putting them in real pointer variables first, here they are.
+//    They should be set to null after their usage.
+
+ENTITY* md_entity_holder;
+PANEL* md_panel_holder;
+
+
+// == Debug functions
+
+function md_show_text(txt, y) {
+    draw_text(txt, 10, y, vector(0, 0, 255));
+}
+
+function md_show_position(ent, prefix, posy) {
+    var txt;
+    txt = str_create(prefix);
+
+    md_entity_holder = ent;
+    str_cat_num(txt, "(%.3f, ", md_entity_holder.x);
+    str_cat_num(txt, "%.3f, ", md_entity_holder.y);
+    str_cat_num(txt, "%.3f)", md_entity_holder.z);
+    md_entity_holder = NULL;
+
+    md_show_text(txt, posy);
+}
+
+function md_show_number(num, prefix, y) {
+    var txt;
+    txt = str_create(prefix);
+    str_cat_num(txt, "%.3f", num);
+
+    md_show_text(txt, y);
+}
+
 
 // == The Day Before: a tribute to the zombie extraction shooter that lived for 3 days
 
 var md_zombiego = off;
+
+function md_spawn_zombie() {
+    var zombie;
+    zombie = ent_create("zombielow.mdl", plBiped01_entity.x, ZombieSPFunc);
+
+    md_entity_holder = zombie;
+
+    // Place the zombie on the player by undoing a "x += 5000" it did on its own
+    md_entity_holder.x -= 5000;
+    md_entity_holder.z = -25;
+
+    // Then move the zombie away from the player at a random angle
+    randomize();
+    md_entity_holder.pan = random(360);
+    c_move(md_entity_holder, vector(5000, 0, 0), nullvector, GLIDE + IGNORE_PASSABLE);
+
+    md_entity_holder = NULL;
+
+    diag("\n[Maddie] Spawned zombie!");
+}
 
 function md_the_day_before(min, max) {
     if (md_zombiego) { return; }
@@ -48,8 +102,7 @@ function md_the_day_before(min, max) {
     while (md_zombiego) {
         randomize();
         wait(-random(max - min) - min);
-
-        ent_create("zombielow.mdl", plBiped01_entity.x, ZombieSPFunc);
+        md_spawn_zombie();
     }
 }
 
@@ -59,8 +112,6 @@ function md_the_day_after() {
 
 
 // == Shortcuts to spawn random stuff
-
-ENTITY* md_entity_holder;
 
 function md_scale_entity(entity, scale) {
     md_entity_holder = entity;
@@ -141,16 +192,13 @@ function md_turn_into_bikeman() {
 
 // == Shortcuts to go to dummied out places
 
-PANEL* md_panel_pointer;
-
 function md_enter_place(actionName, placeNamePanel) {
     var teleporter;
     teleporter = ent_create(NULL, plBiped01_entity.x, actionName);
 
-    // You need to assign your pointer to a REAL pointer before you can use it. Go figure.
-    md_panel_pointer = placeNamePanel;
-    while (md_panel_pointer.visible) { wait(1); }
-    md_panel_pointer = NULL;
+    md_panel_holder = placeNamePanel;
+    while (md_panel_holder.visible) { wait(1); }
+    md_panel_holder = NULL;
 
     ent_remove(teleporter);
     diag("\n[Maddie] Removed teleporter!");
@@ -176,4 +224,83 @@ function md_enter_caesars() {
 }
 function md_exit_caesars() {
     md_exit_place(caesars_exit);
+}
+
+
+// == Wanted level modifications
+
+function md_call_police(count) {
+    police_called = count;
+    var i = 0;
+    while (i < count) {
+        ent_create("police_car.mdl", PcarPOS.x, police_event);
+        wait(-1);
+        i += 1;
+    }
+}
+
+function md_wanted_clear() {
+    trouble = 0;
+    more_trouble = 0;
+    peds_killed = 0;
+    police_killed = 0;
+    police_called = 0;
+}
+function md_wanted_1star() {
+    peds_killed = 31;
+    trouble = 1;
+}
+function md_wanted_3stars() {
+    peds_killed = 50;
+    trouble = 2;
+    md_call_police(2);
+}
+function md_wanted_5stars() {
+    peds_killed = 101;
+    trouble = 3;
+    md_call_police(3);
+}
+
+
+// == Gravity changes
+
+function md_setgravity(factor) {
+    ph_setgravity(vector(0, 0, -386 * factor));
+    bipedPhy01_gravity = 10 * factor;
+}
+
+function md_flipped_gravity() {
+    md_setgravity(-1);
+}
+function md_zero_gravity() {
+    md_setgravity(0);
+}
+function md_low_gravity() {
+    md_setgravity(0.1);
+}
+function md_normal_gravity() {
+    md_setgravity(1);
+}
+function md_mega_gravity() {
+    md_setgravity(10);
+}
+
+
+// == Visual effects
+
+function md_poop_effect() {
+    Poo_show();
+}
+
+function md_enable_snow() {
+    if (~snow_on) { toggle_snow(); }
+}
+function md_disable_snow() {
+    if (snow_on) { toggle_snow(); }
+}
+function md_enable_rain() {
+    if (~rain_on) { toggle_rain(); }
+}
+function md_disable_rain() {
+    if (rain_on) { toggle_rain(); }
 }

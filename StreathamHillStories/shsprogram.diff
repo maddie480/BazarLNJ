@@ -59,6 +59,19 @@ index 221bdb2..1bc3049 100755
  if(Multiplayer == 0)
  {
  controllerpause();
+diff --git a/Main/sky_move.wdl b/Main/sky_move.wdl
+index 1671bcc..b723423 100755
+--- a/Main/sky_move.wdl
++++ b/Main/sky_move.wdl
+@@ -2044,7 +2044,7 @@ action Base_Effect3_emitter() {
+    var eff_frac; eff_frac = 0;
+    
+    wait(1);
+-   while(my != NULL) {
++   while(my != NULL && snow_on) {
+       
+       if(at_home == 0) && (in_caesars == 0) || (at_home == 0) && (in_megabowl == 0)
+ 			{
 diff --git a/Main/startupSHS.wdl b/Main/startupSHS.wdl
 index 168f35e..ea42e39 100755
 --- a/Main/startupSHS.wdl
