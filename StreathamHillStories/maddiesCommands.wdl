@@ -4,7 +4,7 @@ font md_console_font = "Courier New", 1, 24;
 
 string md_exec_buffer = "#60"; // yes, this means 60 spaces
 
-text md_console_txt {
+TEXT md_console_txt {
     pos_x = 10;
     pos_y = 10;
     layer = 10;
@@ -303,4 +303,103 @@ function md_enable_rain() {
 }
 function md_disable_rain() {
     if (rain_on) { toggle_rain(); }
+}
+
+
+// == Camera effects
+
+var md_upside_down = off;
+var md_tiny_screen = off;
+var md_flip = off;
+
+VIEW md_modified_view {
+    layer = 1;
+}
+PANEL md_black_backdrop {
+    pos_x = 0;
+    pos_y = 0;
+    size_x = 1920;
+    size_y = 1080;
+    layer = -1;
+    red = 0;
+    green = 0;
+    blue = 0;
+    flags = LIGHT;
+}
+
+function md_upside_down_on() {
+    md_upside_down = on;
+    md_run_modified_view();
+}
+function md_upside_down_off() {
+    md_upside_down = off;
+}
+function md_tiny_screen_on() {
+    md_tiny_screen = on;
+    md_run_modified_view();
+}
+function md_tiny_screen_off() {
+    md_tiny_screen = off;
+}
+function md_flip_on() {
+    md_flip = on;
+    md_run_modified_view();
+}
+function md_flip_off() {
+    md_flip = off;
+}
+
+function md_run_modified_view() {
+    if (md_modified_view.visible == on) { return; }
+
+    md_modified_view.visible = on;
+    md_black_backdrop.visible = on;
+    camera.visible = off;
+
+    while (md_upside_down || md_tiny_screen || md_flip) {
+        proc_late(); // be sure that the camera was updated before us
+
+        // copy the regular camera by default
+        md_modified_view.genius = camera.genius;
+        md_modified_view.aspect = camera.aspect;
+        md_modified_view.arc = camera.arc;
+        md_modified_view.fog_start = camera.fog_start;
+        md_modified_view.fog_end = camera.fog_end;
+        md_modified_view.clip_far = camera.clip_far;
+        md_modified_view.clip_near = camera.clip_near;
+        md_modified_view.x = camera.x;
+        md_modified_view.y = camera.y;
+        md_modified_view.z = camera.z;
+        md_modified_view.pan = camera.pan;
+        md_modified_view.tilt = camera.tilt;
+        md_modified_view.roll = camera.roll;
+
+        if (md_upside_down) {
+            md_modified_view.roll = (camera.roll - 180) % 360;
+        }
+
+        if (md_tiny_screen) {
+            md_modified_view.pos_x = screen_size.x * 0.4;
+            md_modified_view.pos_y = screen_size.y * 0.4;
+            md_modified_view.size_x = screen_size.x * 0.2;
+            md_modified_view.size_y = screen_size.y * 0.2;
+        } else {
+            md_modified_view.pos_x = 0;
+            md_modified_view.pos_y = 0;
+            md_modified_view.size_x = screen_size.x;
+            md_modified_view.size_y = screen_size.y;
+        }
+
+        // inspired by the official docs at http://manual.conitec.net/aview-aspect.htm
+        if (md_flip) {
+            md_modified_view.aspect = cos(total_ticks);
+        }
+
+        wait(1);
+    }
+
+    // all effects are disabled, so get rid of the modified view
+    md_modified_view.visible = off;
+    md_black_backdrop.visible = off;
+    camera.visible = on;
 }

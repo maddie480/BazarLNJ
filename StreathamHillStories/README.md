@@ -136,3 +136,6 @@ Et voici quelques commandes ajoutées par le patch, pour activer certaines fonct
 - `md_setgravity(factor)` - modifie la gravité des véhicules et des piétons, 1 étant la valeur normale. Valeurs prédéfinies : `md_flipped_gravity()` = -1, `md_zero_gravity()` = 0, `md_low_gravity()` = 0.1, `md_normal_gravity()` = 1, `md_mega_gravity()` = 10
 - `md_poop_effect()` - fait caca sur ton écran, comme `Poo_show()`
 - `md_enable_rain()` / `md_disable_rain()` / `md_enable_snow()` / `md_disable_snow()` - fait neiger, ou pleuvoir... ou les deux.
+- `md_upside_down_on()` / `md_upside_down_off()` - met l'écran à l'envers
+- `md_tiny_screen_on()` / `md_tiny_screen_off()` - met le jeu en tout petit (20% de sa taille normale) dans un petit carré au milieu de l'écran. Comme Superman 64.
+- `md_flip_on()` / `md_flip_off()` - fait tourner verticalement l'écran en permanence (âmes sensibles s'abstenir)
