@@ -1,0 +1,1 @@
+jre\bin\java.exe -cp classes ovh.maddie480.shscontrol.Client "[insérer chemin vers Streatham Hill Stories ici]"

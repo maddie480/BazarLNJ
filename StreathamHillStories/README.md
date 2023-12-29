@@ -130,12 +130,21 @@ Et voici quelques commandes ajoutées par le patch, pour activer certaines fonct
 - `md_spawn_clio()` - fait spawn une Clio, qui a encore plus de soucis de physique que la R8 :boom:
 - `md_spawn_bicycle()` - fait spawn ce qu'il reste d'un vélo dans le code du jeu, ce qui a de grandes chances de planter
 - `md_enter_bowling()` / `md_exit_bowling()` / `md_enter_caesars()` / `md_exit_caesars()` - entre et sort de 2 lieux qui ne semblent pas avoir été implémentés (mais on a quand même le son)
-- `md_turn_into_xxx()` - te transforme en personnage du multi : remplacer `xxx` par `mainplayer`, `man1`, `woman1`, `woman2`, `woman3`, `woman1`, `fbiagent`, `jessica`, `john`, `simon`, `toni` ou `bikeman`
+- `md_turn_into_xxx()` - te transforme en personnage du multi : remplacer `xxx` par `mainplayer`, `man1`, `woman1`, `woman2`, `woman3`, `woman1`, `fbiagent`, `jessica`, `john`, `simon`, `toni` ou `bikeman`... ou alors `md_turn_into_random_character()` pour en choisir un au hasard.
 - `md_get_out_of_the_ground()` - permet de se sortir du sol... il arrive souvent d'être coincé dans le sol après avoir utilisé `md_turn_into_xxx()`
-- `md_wanted_clear()` / `md_wanted_1star()` / `md_wanted_3stars()` / `md_wanted_5stars()` - modifie le niveau de recherche de la police
-- `md_setgravity(factor)` - modifie la gravité des véhicules et des piétons, 1 étant la valeur normale. Valeurs prédéfinies : `md_flipped_gravity()` = -1, `md_zero_gravity()` = 0, `md_low_gravity()` = 0.1, `md_normal_gravity()` = 1, `md_mega_gravity()` = 10
+- `md_wanted_clear()` / `md_wanted_1star()` / `md_wanted_3stars()` / `md_wanted_5stars()` / `md_wanted_random()` - modifie le niveau de recherche de la police
+- `md_setgravity(factor)` - modifie la gravité des véhicules et des piétons, 1 étant la valeur normale. Valeurs prédéfinies : `md_flipped_gravity()` = -1, `md_zero_gravity()` = 0, `md_low_gravity()` = 0.1, `md_normal_gravity()` = 1, `md_mega_gravity()` = 10, `md_random_gravity()` - l'une des gravités au hasard
 - `md_poop_effect()` - fait caca sur ton écran, comme `Poo_show()`
 - `md_enable_rain()` / `md_disable_rain()` / `md_enable_snow()` / `md_disable_snow()` - fait neiger, ou pleuvoir... ou les deux.
 - `md_upside_down_on()` / `md_upside_down_off()` - met l'écran à l'envers
 - `md_tiny_screen_on()` / `md_tiny_screen_off()` - met le jeu en tout petit (20% de sa taille normale) dans un petit carré au milieu de l'écran. Comme Superman 64.
 - `md_flip_on()` / `md_flip_off()` - fait tourner verticalement l'écran en permanence (âmes sensibles s'abstenir)
+
+## Chat Control
+
+Le jeu peut être contrôlé par le chat Twitch ! Pour ce faire, il faut télécharger le client dont le code source est dans le dossier `ChatControl-src`, puis ouvrir le fichier `Run Client.bat` et remplacer `[insérer chemin vers Streatham Hill Stories ici]` par ... le chemin vers Streatham Hill Stories. Ce qui devrait donner quelque chose comme :
+```bat
+jre\bin\java.exe -cp classes ovh.maddie480.shscontrol.Client "C:\Program Files (x86)\Steam\steamapps\common\Streatham Hill Stories"
+```
+
+Ensuite, lancer `Run Client.bat`. Inutile de le relancer si le jeu plante ! Ce petit client fonctionne en ouvrant une connexion avec LNJ_Bot pour recevoir des ordres, et en les transmettant au jeu en... écrivant un chiffre dans un fichier. Oui, j'ai essayé de faire communiquer le jeu et LNJ_Bot directement, et non, ça n'a pas marché.

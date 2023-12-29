@@ -1,3 +1,6 @@
+// Note for whoever is reading this: this is C-Script. Like C, but without pointers, or even variable types.
+// Reference: http://manual.conitec.net/
+
 // == Console: adapted from another 3D GameStudio game called W.A.R. Soldiers (https://www.myabandonware.com/game/w-a-r-soldiers-ge7)
 
 font md_console_font = "Courier New", 1, 24;
@@ -189,6 +192,25 @@ function md_turn_into_bikeman() {
     md_turn_into_character("mpbikeman.mdl");
 }
 
+function md_turn_into_random_character() {
+    randomize();
+    var drawn;
+    drawn = random(11);
+
+    // This language doesn't have switch cases!
+    if(drawn < 1) { md_turn_into_mainplayer(); return; }
+    if(drawn < 2) { md_turn_into_man1(); return; }
+    if(drawn < 3) { md_turn_into_woman1(); return; }
+    if(drawn < 4) { md_turn_into_woman2(); return; }
+    if(drawn < 5) { md_turn_into_woman3(); return; }
+    if(drawn < 6) { md_turn_into_fbiagent(); return; }
+    if(drawn < 7) { md_turn_into_jessica(); return; }
+    if(drawn < 8) { md_turn_into_john(); return; }
+    if(drawn < 9) { md_turn_into_simon(); return; }
+    if(drawn < 10) { md_turn_into_toni(); return; }
+    if(drawn < 11) { md_turn_into_bikeman(); return; }
+}
+
 
 // == Shortcuts to go to dummied out places
 
@@ -260,6 +282,14 @@ function md_wanted_5stars() {
     trouble = 3;
     md_call_police(3);
 }
+function md_wanted_random() {
+    randomize();
+    var drawn;
+    drawn = random(3);
+    if (drawn < 1) { md_wanted_1star(); return; }
+    if (drawn < 2) { md_wanted_3stars(); return; }
+    if (drawn < 3) { md_wanted_5stars(); return; }
+}
 
 
 // == Gravity changes
@@ -283,6 +313,15 @@ function md_normal_gravity() {
 }
 function md_mega_gravity() {
     md_setgravity(10);
+}
+function md_random_gravity() {
+    randomize();
+    var drawn;
+    drawn = random(4);
+    if (drawn < 1) { md_flipped_gravity(); return; }
+    if (drawn < 2) { md_zero_gravity(); return; }
+    if (drawn < 3) { md_low_gravity(); return; }
+    if (drawn < 4) { md_mega_gravity(); return; }
 }
 
 
@@ -402,4 +441,106 @@ function md_run_modified_view() {
     md_modified_view.visible = off;
     md_black_backdrop.visible = off;
     camera.visible = on;
+}
+
+// == Trigger the different effects based on IDs
+
+var md_is_in_place = off;
+var md_has_modified_gravity = off;
+
+function md_trigger_effect(id) {
+    if (id == 1) { md_spawn_zombie(); return; }
+    if (id == 2) { md_spawn_clio(); return; }
+    if (id == 3) { md_spawn_r8(); return; }
+    if (id == 4) { md_turn_into_random_character(); return; }
+    if (id == 5) {
+        if (md_is_in_place) { return; }
+        md_is_in_place = on;
+        md_enter_bowling();
+        wait(-30);
+        md_exit_bowling();
+        md_is_in_place = off;
+        return;
+    }
+    if (id == 6) {
+        if (md_is_in_place) { return; }
+        md_is_in_place = on;
+        md_enter_caesars();
+        wait(-30);
+        md_exit_caesars();
+        md_is_in_place = off;
+        return;
+    }
+    if (id == 7) { md_wanted_random(); return; }
+    if (id == 8) {
+        if (md_has_modified_gravity) { return; }
+        md_has_modified_gravity = on;
+        md_random_gravity();
+        wait(-30);
+        md_normal_gravity();
+        md_has_modified_gravity = off;
+        return;
+    }
+    if (id == 9) { md_poop_effect(); return; }
+    if (id == 10) {
+        if (snow_on) { return; }
+        md_enable_snow();
+        wait(-30);
+        md_disable_snow();
+        return;
+    }
+    if (id == 11) {
+        if (rain_on) { return; }
+        md_enable_rain();
+        wait(-30);
+        md_disable_rain();
+        return;
+    }
+    if (id == 12) {
+        if (md_upside_down) { return; }
+        md_upside_down_on();
+        wait(-30);
+        md_upside_down_off();
+        return;
+    }
+    if (id == 13) {
+        if (md_tiny_screen) { return; }
+        md_tiny_screen_on();
+        wait(-30);
+        md_tiny_screen_off();
+        return;
+    }
+    if (id == 14) {
+        if (md_flip) { return; }
+        md_flip_on();
+        wait(-30);
+        md_flip_off();
+        return;
+    }
+    diag_var("[Maddie] Asked to trigger action %.0f that does not exist!", id);
+}
+
+starter md_chat_control() {
+    wait(-30);
+
+    while (1) {
+        if (file_exists("ChatControl.txt")) {
+            var file_handle;
+            file_handle = file_open_read("ChatControl.txt");
+            var command;
+            command = file_var_read(file_handle);
+            file_close(file_handle);
+
+            diag_var("[Maddie] Received command: %.0f", command);
+
+            // 0 is just a keepalive
+            if (command != 0) {
+                md_trigger_effect(command);
+            }
+
+            file_delete("ChatControl.txt");
+        }
+
+        wait(-1);
+    }
 }

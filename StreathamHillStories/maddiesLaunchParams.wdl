@@ -1,3 +1,6 @@
+// Note for whoever is reading this: this is C-Script. Like C, but without pointers, or even variable types.
+// Reference: http://manual.conitec.net/
+
 function md_handle_command_line_params() {
     var forcedMode = "";
     if (str_stri(command_str, "--christmas")){
