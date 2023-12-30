@@ -350,6 +350,10 @@ function md_disable_rain() {
 var md_upside_down = off;
 var md_tiny_screen = off;
 var md_flip = off;
+var md_clipping_land = off;
+var md_mirror_mode = off;
+var md_sniper_view = off;
+var md_tunnel_vision = off;
 
 VIEW md_modified_view {
     layer = 1;
@@ -387,6 +391,34 @@ function md_flip_on() {
 function md_flip_off() {
     md_flip = off;
 }
+function md_clipping_land_on() {
+    md_clipping_land = on;
+    md_run_modified_view();
+}
+function md_clipping_land_off() {
+    md_clipping_land = off;
+}
+function md_mirror_mode_on() {
+    md_mirror_mode = on;
+    md_run_modified_view();
+}
+function md_mirror_mode_off() {
+    md_mirror_mode = off;
+}
+function md_sniper_view_on() {
+    md_sniper_view = on;
+    md_run_modified_view();
+}
+function md_sniper_view_off() {
+    md_sniper_view = off;
+}
+function md_tunnel_vision_on() {
+    md_tunnel_vision = on;
+    md_run_modified_view();
+}
+function md_tunnel_vision_off() {
+    md_tunnel_vision = off;
+}
 
 function md_run_modified_view() {
     if (md_modified_view.visible == on) { return; }
@@ -395,7 +427,7 @@ function md_run_modified_view() {
     md_black_backdrop.visible = on;
     camera.visible = off;
 
-    while (md_upside_down || md_tiny_screen || md_flip) {
+    while (md_upside_down || md_tiny_screen || md_flip || md_clipping_land || md_mirror_mode || md_sniper_view || md_tunnel_vision) {
         proc_late(); // be sure that the camera was updated before us
 
         // copy the regular camera by default
@@ -432,6 +464,21 @@ function md_run_modified_view() {
         // inspired by the official docs at http://manual.conitec.net/aview-aspect.htm
         if (md_flip) {
             md_modified_view.aspect = cos(total_ticks);
+        }
+
+        if (md_clipping_land) {
+            md_modified_view.clip_far = 3000;
+        }
+
+        // FOV effects: md_tunnel_vision (FOV++) and md_sniper_view (FOV--) cancel each other out
+        if (md_tunnel_vision && md_sniper_view == 0) {
+            md_modified_view.arc = 170;
+        }
+        if (md_sniper_view && md_tunnel_vision == 0) {
+            md_modified_view.arc = 20;
+        }
+        if (md_mirror_mode) {
+            md_modified_view.arc = -md_modified_view.arc;
         }
 
         wait(1);
@@ -517,6 +564,104 @@ function md_on_radio_stop() {
 }
 
 
+// == Game speed manipulation
+
+function md_ultra_slow() {
+    time_factor = 0.2;
+}
+function md_ultra_fast() {
+    time_factor = 4;
+}
+function md_normal_speed() {
+    time_factor = 1;
+}
+
+
+// == Vanilla game cheats
+
+function md_superman_on() {
+    // this is a vanilla copy-paste, from the middle of a 800-line method called PhonePosition().
+    // yes, this is the kind of code we're dealing with.
+    plBiped01_entity._max_force_x__003 = 197.5;
+    plBiped01_entity._max_ang_force_pan__003 = 11.0;
+    plBiped01_entity._jump_height__003 = 675.0;
+}
+
+function md_superman_off() {
+    plBiped01_entity._max_force_x__003 = 12.5;
+    plBiped01_entity._max_ang_force_pan__003 = 10.0;
+    plBiped01_entity._jump_height__003 = 75.0;
+}
+
+function md_spawn_fighter_jet() {
+    // yes, this *really* spawns a fighter jet that is absolutely not a helicopter.
+    enable_copter();
+}
+
+
+// == Murquède
+
+var md_murk_cooldown = off;
+
+function md_murk() {
+    plBiped01_entity._health__003 = 0;
+}
+
+
+// == Change weapons (verbatim copypastes from vanilla)
+
+ENTITY* md_bat_entity = NULL;
+
+function md_switch_weapon_common() {
+    have_bat = 0;
+    have_flamethrower = 0;
+    have_grenade = 0;
+
+    GunHUD_pan.visible = off;
+    FlameHUD_pan.visible = off;
+    BatHUD_pan.visible = off;
+    BombHUD_pan.visible = off;
+
+    plBipedWeap00_current_weapon = 0;
+
+    if (md_bat_entity != NULL) { ent_remove(md_bat_entity); }
+}
+
+function md_switch_to_gun() {
+    md_switch_weapon_common();
+    plBipedWeap00_current_weapon = 3;
+    Gun_show();
+    media_play("gunselect.mp3", null, 380);
+}
+
+function md_switch_to_grenade() { // aka bomb
+    md_switch_weapon_common();
+    have_grenade = 1;
+    had_grenade = 1;
+    if (bomb_ammo <= 80) { bomb_ammo += 20; }
+    Bomb_Show();
+    media_play("grenade_pickup.mp3", null, 100);
+}
+
+function md_switch_to_flamethrower() {
+    md_switch_weapon_common();
+    have_flamethrower = 1;
+    had_flamethrower = 1;
+    flame_ammo += 200;
+    flame_show();
+    media_play("grenade_pickup.mp3", null, 100);
+}
+
+function md_switch_to_bat() {
+    md_switch_weapon_common();
+    have_bat = 1;
+    had_bat = 1;
+    md_bat_entity = ent_create("bat.mdl", nullvector, swingbat);
+    bat_show();
+    media_play("grenade_pickup.mp3", null, 100);
+}
+
+
 // == Trigger the different effects based on IDs (Chat Control + Chaos Mode)
 
 var md_is_in_place = off;
@@ -592,6 +737,70 @@ function md_trigger_effect(id) {
         return;
     }
     if (id == 15) { md_radio_lnj(); return; }
+    if (id == 16) {
+        if (time_factor != 1) { return; }
+        md_ultra_slow();
+        wait(-30);
+        md_normal_speed();
+        return;
+    }
+    if (id == 17) {
+        if (time_factor != 1) { return; }
+        md_ultra_fast();
+        wait(-30);
+        md_normal_speed();
+        return;
+    }
+    if (id == 18) {
+        if (plBiped01_entity._max_force_x__003 == 197.5) { return; }
+        md_superman_on();
+        wait(-30);
+        md_superman_off();
+        return;
+    }
+    if (id == 19) { md_spawn_fighter_jet(); return; }
+    if (id == 20) {
+        if (md_clipping_land) { return; }
+        md_clipping_land_on();
+        wait(-30);
+        md_clipping_land_off();
+        return;
+    }
+    if (id == 21) {
+        if (md_mirror_mode) { return; }
+        md_mirror_mode_on();
+        wait(-30);
+        md_mirror_mode_off();
+        return;
+    }
+    if (id == 22) {
+        if (md_sniper_view) { return; }
+        md_sniper_view_on();
+        wait(-30);
+        md_sniper_view_off();
+        return;
+    }
+    if (id == 23) {
+        if (md_tunnel_vision) { return; }
+        md_tunnel_vision_on();
+        wait(-30);
+        md_tunnel_vision_off();
+        return;
+    }
+    if (id == 24) {
+        if (md_murk_cooldown) { return; }
+        md_murk_cooldown = on;
+        md_murk();
+        // 2 minutes, except GameStudio won't let you wait more than 1
+        wait(-60);
+        wait(-60);
+        md_murk_cooldown = off;
+        return;
+    }
+    if (id == 25) { md_switch_to_gun(); return; }
+    if (id == 26) { md_switch_to_grenade(); return; }
+    if (id == 27) { md_switch_to_flamethrower(); return; }
+    if (id == 28) { md_switch_to_bat(); return; }
     diag_var("\n[Maddie] Asked to trigger action %.0f that does not exist!", id);
 }
 

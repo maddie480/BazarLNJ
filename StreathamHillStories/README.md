@@ -140,6 +140,13 @@ Et voici quelques commandes ajoutées par le patch, pour activer certaines fonct
 - `md_tiny_screen_on()` / `md_tiny_screen_off()` - met le jeu en tout petit (20% de sa taille normale) dans un petit carré au milieu de l'écran. Comme Superman 64.
 - `md_flip_on()` / `md_flip_off()` - fait tourner verticalement l'écran en permanence (âmes sensibles s'abstenir)
 - `md_radio_lnj()` - la radio LNJ directement dans le jeu ! (**fonctionne uniquement quand Chat Control est connecté, voir section suivante**)
+- `md_ultra_slow()` / `md_ultra_fast()` / `md_normal_speed()` - modifie la vitesse du jeu (respectivement x4, x0.2 et x1)
+- `md_clipping_land_on()` / `md_clipping_land_off()` - un effet visuel qui réduit la distance d'affichage. Tu peux aussi la contrôler en maintenant les touches Inser ou Suppr !
+- `md_tunnel_vision_on()` / `md_tunnel_vision_off()` - augmente le champ de vision à 170°, créant un effet tunnel
+- `md_sniper_view_on()` / `md_sniper_view_off()` - réduit le champ de vision à 20°, ce qui crée un effet "vue sniper" ou "téléscope"
+- `md_mirror_mode_on()` / `md_mirror_mode_off()` - _inverse_ le champ de vision, ce qui retourne horizontalement l'écran
+- `md_murk()` - tu meurs. Et l'écran affiche "MURKED". Bon, il semblerait que "get murked" veuille dire "se faire tuer", mais "murk" tout seul veuille dire "obscurité" donc ça n'a aucun sens, mais tant pis.
+- `md_switch_to_gun()` / `md_switch_to_grenade()` / `md_switch_to_flamethrower()` / `md_switch_to_bat()` - change d'arme
 
 ## Chat Control
 
