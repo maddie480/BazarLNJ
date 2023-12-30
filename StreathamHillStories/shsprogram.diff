@@ -11,6 +11,18 @@ index bcc2d4c..9f5a2e5 100755
  	while (bicycle_entity._old_entity_handle == plSelect_curr_model) { wait(1); }
  		if((YOU == plBiped01_entity) && (plSelect_curr_model != bicycle_entity))
  	{
+diff --git a/Main/copter.wdl b/Main/copter.wdl
+index 4c08292..c6aa425 100755
+--- a/Main/copter.wdl
++++ b/Main/copter.wdl
+@@ -407,6 +407,7 @@ temp=temp;
+ 		media_tune(track8_handle, 1,0,0);
+ 		media_tune(xmas_handle, 1,0,0);
+ 		media_tune(xmas2_handle, 1,0,0);
++		md_on_radio_stop();
+ 		vec_set(my.x,YOU.x);
+ 		d3d_texlimit = 2048;
+ 		
 diff --git a/Main/shsprogram.wdl b/Main/shsprogram.wdl
 index 221bdb2..1bc3049 100755
 --- a/Main/shsprogram.wdl
@@ -92,6 +104,34 @@ index 168f35e..ea42e39 100755
  
  		//   	
  
+diff --git a/Main/vehicle.wdl b/Main/vehicle.wdl
+index 2201599..b0e59eb 100755
+--- a/Main/vehicle.wdl
++++ b/Main/vehicle.wdl
+@@ -2117,6 +2117,7 @@ snd_stop(quad_engine);
+ 		media_tune(track8_handle, 1,0,0);
+ 		media_tune(xmas_handle, 1,0,0);
+ 		media_tune(xmas2_handle, 1,0,0);
++		md_on_radio_stop();
+ 		
+ 	   wait(-0.2);
+ 	//anim_percent = 100;
+@@ -2185,6 +2186,7 @@ snd_stop(quad_engine);
+ 		media_tune(track8_handle, 1,0,0);
+ 		media_tune(xmas_handle, 1,0,0);
+ 		media_tune(xmas2_handle, 1,0,0);
++		md_on_radio_stop();
+ 	   
+ 	//anim_percent = 100;
+ 	media_loop("backwind.mp3", null, 80);
+@@ -2558,6 +2560,7 @@ media_tune(track7_handle, 1,0,0);
+ media_tune(track8_handle, 1,0,0);
+ media_tune(xmas_handle, 1,0,0);
+ media_tune(xmas2_handle, 1,0,0);
++md_on_radio_stop();
+ //}
+ media_play("tune.mp3", null, 300);
+ radio();
 diff --git a/shstories.wdl b/shstories.wdl
 index b27bb77..d354e13 100755
 --- a/shstories.wdl

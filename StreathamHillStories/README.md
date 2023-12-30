@@ -139,6 +139,7 @@ Et voici quelques commandes ajoutées par le patch, pour activer certaines fonct
 - `md_upside_down_on()` / `md_upside_down_off()` - met l'écran à l'envers
 - `md_tiny_screen_on()` / `md_tiny_screen_off()` - met le jeu en tout petit (20% de sa taille normale) dans un petit carré au milieu de l'écran. Comme Superman 64.
 - `md_flip_on()` / `md_flip_off()` - fait tourner verticalement l'écran en permanence (âmes sensibles s'abstenir)
+- `md_radio_lnj()` - la radio LNJ directement dans le jeu ! (**fonctionne uniquement quand Chat Control est connecté, voir section suivante**)
 
 ## Chat Control
 
@@ -148,3 +149,5 @@ jre\bin\java.exe -cp classes ovh.maddie480.shscontrol.Client "C:\Program Files (
 ```
 
 Ensuite, lancer `Run Client.bat`. Inutile de le relancer si le jeu plante ! Ce petit client fonctionne en ouvrant une connexion avec LNJ_Bot pour recevoir des ordres, et en les transmettant au jeu en... écrivant un chiffre dans un fichier. Oui, j'ai essayé de faire communiquer le jeu et LNJ_Bot directement, et non, ça n'a pas marché.
+
+Le serveur est hébergé par moi-même (Maddie), et il n'est démarré que sur demande. N'oubliez pas de me demander avant d'essayer de l'utiliser ^^

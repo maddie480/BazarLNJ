@@ -443,7 +443,81 @@ function md_run_modified_view() {
     camera.visible = on;
 }
 
-// == Trigger the different effects based on IDs
+
+// == Radio LNJ
+
+var md_radio_lnj_handle = NULL;
+
+function md_radio_lnj() {
+    if (radio_playing || md_radio_lnj_handle != NULL) { return; }
+
+    // mute all other radios... this is how it works, yes!
+    media_tune(track_handle, 1,0,0);
+    media_tune(track2_handle, 1,0,0);
+    media_tune(track3_handle, 1,0,0);
+    media_tune(track4_handle, 1,0,0);
+    media_tune(track5_handle, 1,0,0);
+    media_tune(track6_handle, 1,0,0);
+    media_tune(track7_handle, 1,0,0);
+    media_tune(track8_handle, 1,0,0);
+    media_tune(xmas_handle, 1,0,0);
+    media_tune(xmas2_handle, 1,0,0);
+
+    // we are tuning the radio (not playing it, mind you)
+    radio_playing = on;
+    media_play("tune.mp3", NULL, 300);
+
+    // it's unlikely the whole process will take less than 2 seconds, so just start it now
+
+    while (1) {
+        diag("\n[Maddie] Radio requested");
+
+        // request a radio MP3 and wait for it
+        file_close(file_open_write("RadioPlz.txt")); // aka file_create
+        while (!file_exists("RadioReady.txt")) { wait(1); }
+
+        var file;
+        file = file_open_read("RadioReady.txt");
+        var time_left;
+        time_left = file_var_read(file);
+        file_close(file);
+        file_delete(file);
+
+        diag("\n[Maddie] Radio received");
+
+        radio_playing = off;
+
+        // then just play it
+        md_radio_lnj_handle = media_play("RadioLNJ.mp3", NULL, 150);
+
+        // and wait for it to be finished
+        // except you cannot wait for more than 60 seconds, so it's stupid workaround time
+        while (time_left > 60000) {
+            diag_var("\n[Maddie] Time left: %.0f ms, waiting for 1 minute", time_left);
+            wait(-60);
+            time_left = time_left - 60000;
+        }
+        diag_var("\n[Maddie] Time left: %.0f ms, waiting", time_left);
+        wait(-time_left / 1000);
+
+        diag("\n[Maddie] Radio stopped due to end of song");
+        media_stop(md_radio_lnj_handle);
+        md_radio_lnj_handle = NULL;
+    }
+}
+
+// called from the different parts of the code that mute all radios
+function md_on_radio_stop() {
+    if (md_radio_lnj_handle != NULL) {
+        diag("\n[Maddie] Radio stopped due to game");
+        media_stop(md_radio_lnj_handle);
+        md_radio_lnj_handle = NULL;
+        proc_kill(md_radio_lnj);
+    }
+}
+
+
+// == Trigger the different effects based on IDs (Chat Control + Chaos Mode)
 
 var md_is_in_place = off;
 var md_has_modified_gravity = off;
@@ -517,7 +591,8 @@ function md_trigger_effect(id) {
         md_flip_off();
         return;
     }
-    diag_var("[Maddie] Asked to trigger action %.0f that does not exist!", id);
+    if (id == 15) { md_radio_lnj(); return; }
+    diag_var("\n[Maddie] Asked to trigger action %.0f that does not exist!", id);
 }
 
 starter md_chat_control() {
@@ -531,7 +606,7 @@ starter md_chat_control() {
             command = file_var_read(file_handle);
             file_close(file_handle);
 
-            diag_var("[Maddie] Received command: %.0f", command);
+            diag_var("\n[Maddie] Received command: %.0f", command);
 
             // 0 is just a keepalive
             if (command != 0) {
