@@ -610,7 +610,7 @@ function md_murk() {
 
 // == Change weapons (verbatim copypastes from vanilla)
 
-ENTITY* md_bat_entity = NULL;
+var md_bat_entity = NULL;
 
 function md_switch_weapon_common() {
     have_bat = 0;
@@ -659,6 +659,110 @@ function md_switch_to_bat() {
     md_bat_entity = ent_create("bat.mdl", nullvector, swingbat);
     bat_show();
     media_play("grenade_pickup.mp3", null, 100);
+}
+
+
+// == Explosive pedestrians
+
+var md_exploding_pedestrians = off;
+
+TEXT md_exploding_pedestrians_notice {
+    string = "Exploding Pedestrians Active";
+    blue = 0;
+    green = 0;
+    red = 255;
+    pos_x = 10;
+    pos_y = 50;
+    flags = SHADOW | OUTLINE;
+    font = md_console_font;
+}
+
+function md_exploding_pedestrians_on() {
+    md_exploding_pedestrians = on;
+    md_exploding_pedestrians_notice.visible = on;
+}
+function md_exploding_pedestrians_off() {
+    md_exploding_pedestrians = off;
+    md_exploding_pedestrians_notice.visible = off;
+}
+
+function md_on_pedestrian_hit() {
+    // note: this is called from pedestrian methods, so "me" is the pedestrian in question
+    if (md_exploding_pedestrians == off) { return; }
+
+    // this is the code for grenades, kind of.
+    ent_create(NULL, my.x, firstex_emitter);
+    ent_create("ball.mdl", my.x, physix_bomb);
+    wait(-0.1); //0.02
+    proc_kill(firstex_emitter);
+
+    if (plSelect_curr_ent == NULL) { return; }
+
+    // the game doesn't come with, like, an actual physical explosion blow effect.
+    // so, we need to do it ourselves!
+    // initialize it with the vector going from the bomb to whatever entity the player is controlling.
+    var explosion_force;
+    explosion_force = vector(0, 0, 0);
+    vec_set(explosion_force, my.x);
+    vec_sub(explosion_force, plSelect_curr_ent.x);
+
+    // the strength of the push depends on the distance.
+    var distance_factor;
+    distance_factor = vec_length(explosion_force);
+    distance_factor = 1 - (distance_factor / 2000);
+
+    diag_var("\n[Maddie] Distance vector: (%.3f, ", explosion_force.x);
+    diag_var("%.3f, ", explosion_force.y);
+    diag_var("%.3f), ", explosion_force.z);
+    diag_var("distance factor: %.3f", distance_factor);
+
+    // give the right force to the vector, and apply it!
+    if (distance_factor <= 0) { return; }
+
+    if (plSelect_curr_ent == plBiped01_entity) {
+        vec_normalize(explosion_force, distance_factor * 1000);
+        plBiped01_entity._gid01_vel_x += explosion_force.x;
+        plBiped01_entity._gid01_vel_y += explosion_force.y;
+        plBiped01_entity._gid01_vel_z += explosion_force.z;
+    } else {
+        vec_normalize(explosion_force, distance_factor * 50000);
+        phent_addvelcentral(plSelect_curr_ent, explosion_force);
+    }
+}
+
+
+// == CHIRAC EN 3D
+
+BMAP md_chirac = <chirac_en_3d.png>;
+
+PANEL md_chirac_container {
+    bmap = md_chirac;
+}
+
+var md_chirac_ongoing = off;
+
+function md_chirac_en_3d() {
+    md_chirac_ongoing = on;
+
+    md_chirac_container.pos_x = (screen_size.x - 500) / 2;
+    md_chirac_container.pos_y = screen_size.y;
+    md_chirac_container.visible = on;
+
+    while (md_chirac_container.pos_y > screen_size.y - 620) {
+        wait(1);
+        md_chirac_container.pos_y -= 800 * time_step / 16;
+    }
+
+    wait(-5);
+
+    while (md_chirac_container.pos_y < screen_size.y) {
+        wait(1);
+        md_chirac_container.pos_y += 800 * time_step / 16;
+    }
+
+    md_chirac_container.visible = off;
+
+    md_chirac_ongoing = off;
 }
 
 
@@ -801,6 +905,14 @@ function md_trigger_effect(id) {
     if (id == 26) { md_switch_to_grenade(); return; }
     if (id == 27) { md_switch_to_flamethrower(); return; }
     if (id == 28) { md_switch_to_bat(); return; }
+    if (id == 29) {
+        if (md_exploding_pedestrians) { return; }
+        md_exploding_pedestrians_on();
+        wait(-30);
+        md_exploding_pedestrians_off();
+        return;
+    }
+    if (id == 30) { md_chirac_en_3d(); return; }
     diag_var("\n[Maddie] Asked to trigger action %.0f that does not exist!", id);
 }
 

@@ -1,3 +1,23 @@
+diff --git a/Main/ai_peds.wdl b/Main/ai_peds.wdl
+index 8dd14ee..0f6e7ef 100755
+--- a/Main/ai_peds.wdl
++++ b/Main/ai_peds.wdl
+@@ -194,6 +194,7 @@ function random_speech()
+    }
+      
+      
++    md_on_pedestrian_hit();
+      wait(1); 
+  
+ 
+@@ -873,6 +874,7 @@ function random_scream()
+    {
+    	ent_playsound(my, MaleScream_snd, 400);
+    }
++   md_on_pedestrian_hit();
+    wait(-5);
+ }   
+ 
 diff --git a/Main/bicycle.wdl b/Main/bicycle.wdl
 index bcc2d4c..9f5a2e5 100755
 --- a/Main/bicycle.wdl

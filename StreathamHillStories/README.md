@@ -112,7 +112,7 @@ En plus de `-nx60 -diag -nc`, il est possible de rajouter :
 
 ## La console
 
-... Et du coup j'ai préparé un petit patch pour rajouter une console au jeu. Il est dans ce dossier, c'est `shsprogram.diff`. Il peut être appliqué au jeu en se mettant à la racine du jeu, et en faisant `git apply shsprogram.diff`. Il faudra aussi copier les fichiers `maddiesCommands.wdl` et `maddiesLaunchParams.wdl` dans le dossier `Main`.
+... Et du coup j'ai préparé un petit patch pour rajouter une console au jeu. Il est dans ce dossier, c'est `shsprogram.diff`. Il peut être appliqué au jeu en se mettant à la racine du jeu, et en faisant `git apply shsprogram.diff`. Il faudra aussi copier les fichiers `maddiesCommands.wdl` et `maddiesLaunchParams.wdl` dans le dossier `Main`. Il faut également copier `chirac_en_3d.png` spécifiquement pour la commande `md_chirac_en_3d()`(voir la liste des commandes ci-dessous). :stuck_out_tongue:
 
 Ensuite, en appuyant sur ², la console s'ouvre en haut à gauche et permet d'exécuter du code arbitraire :sparkles:
 
@@ -147,6 +147,8 @@ Et voici quelques commandes ajoutées par le patch, pour activer certaines fonct
 - `md_mirror_mode_on()` / `md_mirror_mode_off()` - _inverse_ le champ de vision, ce qui retourne horizontalement l'écran
 - `md_murk()` - tu meurs. Et l'écran affiche "MURKED". Bon, il semblerait que "get murked" veuille dire "se faire tuer", mais "murk" tout seul veuille dire "obscurité" donc ça n'a aucun sens, mais tant pis.
 - `md_switch_to_gun()` / `md_switch_to_grenade()` / `md_switch_to_flamethrower()` / `md_switch_to_bat()` - change d'arme
+- `md_exploding_pedestrians_on()` / `md_exploding_pedestrians_off()` - les piétons EXPLOSENT :boom: :a:
+- `md_chirac_en_3d()` - fait apparaître Chirac en 3D sur ton écran. (private joke Les Navets Jouables, le Chirac en 3D vient du jeu GIGN: Anti-Terror Force)
 
 ## Chat Control
 
