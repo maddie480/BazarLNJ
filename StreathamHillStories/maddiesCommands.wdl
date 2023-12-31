@@ -940,3 +940,23 @@ starter md_chat_control() {
         wait(-1);
     }
 }
+
+var md_chaos_mode = off;
+
+function md_chaos_mode_on(min, max) {
+    if (md_chaos_mode) { return; }
+    md_chaos_mode = on;
+    while (md_chaos_mode) {
+        var drawn;
+        randomize();
+        drawn = integer(random(30)) + 1;
+        // Radio LNJ is unlikely to be active unless we're using Chat Control!
+        if (drawn == 15) { continue; }
+        md_trigger_effect(drawn);
+        randomize();
+        wait(-random(max - min) - min);
+    }
+}
+function md_chaos_mode_off() {
+    md_chaos_mode = off;
+}

@@ -149,6 +149,7 @@ Et voici quelques commandes ajoutées par le patch, pour activer certaines fonct
 - `md_switch_to_gun()` / `md_switch_to_grenade()` / `md_switch_to_flamethrower()` / `md_switch_to_bat()` - change d'arme
 - `md_exploding_pedestrians_on()` / `md_exploding_pedestrians_off()` - les piétons EXPLOSENT :boom: :a:
 - `md_chirac_en_3d()` - fait apparaître Chirac en 3D sur ton écran. (private joke Les Navets Jouables, le Chirac en 3D vient du jeu GIGN: Anti-Terror Force)
+- `md_chaos_mode_on(min, max)` - applique un effet aléatoire du Chat Control (voir section suivante) toutes les `min` à `max` secondes (maximum 60 secondes). `md_chaos_mode_off()` désactive le Chaos Mode
 
 ## Chat Control
 
