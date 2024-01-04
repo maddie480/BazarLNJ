@@ -160,4 +160,4 @@ jre\bin\java.exe -cp classes ovh.maddie480.shscontrol.Client "C:\Program Files (
 
 Ensuite, lancer `Run Client.bat`. Inutile de le relancer si le jeu plante ! Ce petit client fonctionne en ouvrant une connexion avec LNJ_Bot pour recevoir des ordres, et en les transmettant au jeu en... écrivant un chiffre dans un fichier. Oui, j'ai essayé de faire communiquer le jeu et LNJ_Bot directement, et non, ça n'a pas marché.
 
-Le serveur est hébergé par moi-même (Maddie), et il n'est démarré que sur demande. N'oubliez pas de me demander avant d'essayer de l'utiliser ^^
+LNJ_Bot ne tourne que pendant les horaires habituels des lives des Navets Jouables (le vendredi à partir de 20h50, pendant environ 4 heures). Chat Control est inutilisable en-dehors de cet horaire et sur d'autres chaînes Twitch sans action de ma part (mais n'hésitez pas à demander ^^).
