@@ -12,10 +12,11 @@ Pour le désinstaller, aller dans `Air Control Final_Data\Managed`, supprimer `A
 
 ## Quelques niveaux intéressants
 
-Pour une raison obscure, beaucoup des niveaux impairs mènent à la cinématique d'intro, mais pas tous. :shrug:
+Pour une liste complète de niveau, consulter le fichier [`level-list.txt`](level-list.txt) qui se trouve dans ce dossier. Le numéro de la ligne correspond au numéro de niveau à entrer dans le level select.
 
 - 8 : "Air Control, le seul simulateur de vol où tu peux prendre une épée et attaquer des zombies avec"
 - 52 : "Do you know why are we here ? To get drive !" avec Eye of the Tiger en musique de fond (coucou le DMCA), suivi d'une série de niveaux de vol, puis après quelques niveaux tu te retrouves _sur Mars_ en véhicule, et puis après tu prends un avion et tu voles sur Mars et... bref, Air Control
+- 86 : Air Control IN SPACE! "Far-far... In a far galaxy... which is far... from us..." Oui, c'est le Star Wars du pauvre, mais on peut entendre de très loin le **vrai** thème de Star Wars sur la gauche... parce que _pourquoi pas !_ Et ensuite tu te retrouves dans un avion rempli de robots... _vérifie ses notes_ pardon, de "chevaliers royaux des étoiles" qui transportent l'or dans l'avion. L'or de quoi ? Euuuuh, Air Control :shrug:
 - 112 : La fin du jeu ? :open_mouth:
 - 126 : Pour aller directement sur Mars en véhicule
 - 194 : Une mission "tuer le terroriste" lambda, mais l'écran clignote en vert pour avoir l'épilepsie qui va avec...
