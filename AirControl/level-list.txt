@@ -141,6 +141,7 @@ Assets/aaa/stewardess/33.unity
 Assets/loading/loadscreen.unity
 Assets/aaa/stewardess/34.unity
 Assets/loading/loadscreen.unity
+Assets/aaa/stewardess/35.unity
 Assets/loading/loadscreen.unity
 Assets/aaa/stewardess/36.unity
 Assets/loading/loadscreen.unity
