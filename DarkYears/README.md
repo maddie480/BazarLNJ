@@ -1,6 +1,6 @@
 # Dark Years
 
-Encore un jeu obscur des tréfonds de Steam, testé par [LNJ en live](https://www.youtube.com/watch?v=NK1tQMmu6Og) mais aussi par [Vinesauce](https://www.youtube.com/watch?v=9tsJ_rbXkhM) ("Vinny plays one of the worst games on steam" tout ça tout ça)
+Encore un jeu obscur des tréfonds de Steam, testé par [LNJ en live](https://www.youtube.com/watch?v=NK1tQMmu6Og) mais aussi par [Vinesauce](https://www.youtube.com/watch?v=9tsJ_rbXkhM) ("Vinny plays one of the worst games on steam")
 
 ... et encore un jeu fait sous Unity, ce qui veut dire que je peux aller voir ce qui se passe dans le code. :stuck_out_tongue: Et j'ai pas été déçue.
 
@@ -21,6 +21,10 @@ La progression du joueur est enregistrée... dans le Registre :
 L'idée de mettre ça dans le Registre peut paraître étrange, mais la décision vient de [Unity](https://docs.unity3d.com/ScriptReference/PlayerPrefs.html) en fait...
 
 Lorsque le jeu veut afficher une cinématique, il change la valeur de `CurMovie` et il charge le niveau `cutscenes` :sparkles:
+
+Il y a une entité nommée `savereg` qui met à jour ces données de sauvegarde, et en parcourant les niveaux, j'ai pu lister les différentes valeurs possibles. **Le mod rajoute un "level select"** à l'écran titre pour choisir parmi ces valeurs... mais les niveaux ne sont pas dans l'ordre, parce que je n'ai pas joué au jeu. :stuck_out_tongue:
+
+:warning: **Attention, le level select écrase les données de sauvegarde.** Si vous y tenez vraiment, vous pouvez en faire une sauvegarde et la restaurer avec l'éditeur de Registre. :sweat_smile:
 
 ## L'écran de chargement
 
