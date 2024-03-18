@@ -1,0 +1,26 @@
+name: Build Nightmare Simulator Level Select
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 2.2.108
+
+    - name: Restore with .NET Core
+      run: cd NightmareSimulator/LevelSelect-src && dotnet restore *.sln
+
+    - name: Build using Mono
+      run: cd NightmareSimulator/LevelSelect-src && msbuild *.sln "/p:Configuration=Release"
+
+    - name: Upload build as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: NightmareSimulatorLevelSelect
+        path: NightmareSimulator/LevelSelect-src/bin/Release/net452
