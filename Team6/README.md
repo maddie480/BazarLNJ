@@ -38,6 +38,14 @@ Quand le mode test est activé, quelques touches gagnent une nouvelle fonction :
   - F1 : sortir du mode free cam
 - T : affiche une grille et fait lag le jeu (je sais pas trop ce que ça représente ce truc là)
 
+## La console dans FlatOut 3
+
+Oui, même [FlatOut 3](https://store.steampowered.com/app/201510/Flatout_3_Chaos__Destruction/) a presque la même console que Pizza Dude, sorti 6 ans plus tôt ! :sweat_smile: Pour l'activer il suffit de prendre `Flatout3_Data.bin` et de le déposer dans le dossier du jeu sous le nom `Data.bin`, en remplaçant le fichier existant.
+
+Ce fichier `Data.bin` est en fait _une archive ZIP protégée par mot de passe_ :sparkles: Le mot de passe est : `k8p0cfY6sXStHfFH` (je l'ai trouvé en fouillant dans l'exécutable du jeu). Cette archive contient des fichiers Lua qui peuvent être modifiés pour bidouiller les menus ou activer le debug mode, entre autres :smile:
+
+D'ailleurs, il y a une fonction pour afficher les logos de Team6 et de Strategy First (l'éditeur) au démarrage du jeu... mais elle est désactivée par défaut :thinking: Elle peut être activée en passant `ShowIntroCompanies` à `true` en haut du fichier `Autoexec.lua`.
+
 ## Jeu en réseau
 
 La plupart des jeux de cette époque fonctionnent de la même façon pour ce qui est du jeu en réseau : en mode "jeu local", le serveur envoie un paquet à tout le réseau local (broadcast UDP sur le port 24958), les clients l'attrapent et se connectent en TCP (toujours sur le port 24958) à l'expéditeur du paquet UDP.
