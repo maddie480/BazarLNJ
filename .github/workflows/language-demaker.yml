@@ -38,10 +38,11 @@ jobs:
         cd Team6/AssetConverter-src
         for file in `ls -1 langfiles`; do
           dest=`echo -n $file | sed s/DCL/txt/`
-          java -cp out ovh.maddie480.LanguageDemaker langfiles/$file langfiles/$dest
+          [ "$file" = "FlatOut3-French.DCL" ] && keys=strings || keys=ints
+          java -ea -cp out ovh.maddie480.LanguageDemaker langfiles/$file langfiles/$dest $keys
 
           # Converting the other way around should result in the same file
-          java -cp out ovh.maddie480.LanguageRemaker langfiles/$dest langfiles/remake.dcl
+          java -cp out ovh.maddie480.LanguageRemaker langfiles/$dest langfiles/remake.dcl $keys
           if ! cmp -s langfiles/$file langfiles/remake.dcl; then
             exit 1
           fi

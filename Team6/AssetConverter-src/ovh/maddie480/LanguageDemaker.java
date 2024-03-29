@@ -13,30 +13,36 @@ public class LanguageDemaker {
     public static void main(String[] args) throws IOException {
         Path src = Paths.get(args[0]);
         Path dst = Paths.get(args[1]);
+        // pass "ints" for most Team 6 games, and "strings" for FlatOut 3, because yes, it uses the same engine apparently
+        boolean keysAreStrings = args[2].equals("strings");
 
         try (InputStream is = Files.newInputStream(src);
              BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(dst), StandardCharsets.UTF_8))) {
 
             // skip header
-            is.skip(0xF);
+            assert is.skip(0xF) == 0xF;
 
             // first is the amount of strings
             int stringCount = readInt32(is);
 
             for (int i = 0; i < stringCount; i++) {
-                // then for each string, we have an int32 id, and an int32 length
-                int stringId = readInt32(is);
-                int stringLength = readInt32(is);
+                String key = keysAreStrings ? readStringFromStream(is) : Integer.toString(readInt32(is));
+                String value = readStringFromStream(is);
 
-                // and finally, the string itself, with 2 bytes per character
-                byte[] rawString = new byte[stringLength * 2];
-                is.read(rawString);
-
-                String stringValue = decodeString(flipTheBytes(rawString));
-
-                writer.write(stringId + ";" + stringValue + "\r\n");
+                writer.write(key + ";" + value + "\r\n");
             }
         }
+    }
+
+    /**
+     * Reads a string from the given input stream, expecting the length of the string as an int32
+     * followed by the string contents.
+     */
+    private static String readStringFromStream(InputStream is) throws IOException {
+        int stringLength = readInt32(is);
+        byte[] rawString = new byte[stringLength * 2];
+        assert is.read(rawString) == stringLength * 2;
+        return decodeString(flipTheBytes(rawString));
     }
 
     /**

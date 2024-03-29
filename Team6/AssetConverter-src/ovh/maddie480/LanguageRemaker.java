@@ -14,6 +14,8 @@ public class LanguageRemaker {
     public static void main(String[] args) throws IOException {
         Path src = Paths.get(args[0]);
         Path dst = Paths.get(args[1]);
+        // pass "ints" for most Team 6 games, and "strings" for FlatOut 3, because yes, it uses the same engine apparently
+        boolean keysAreStrings = args[2].equals("strings");
 
         try (Stream<String> input = Files.lines(src, StandardCharsets.UTF_8);
              OutputStream os = Files.newOutputStream(dst)) {
@@ -27,16 +29,27 @@ public class LanguageRemaker {
 
             for (String line : lines) {
                 String[] split = line.split(";", 2);
-                writeInt32(Integer.parseInt(split[0]), os);
-                writeInt32(split[1].length(), os);
 
-                if (split[1].isEmpty()) continue;
+                if (keysAreStrings) {
+                    writeString(split[0], os);
+                } else {
+                    writeInt32(Integer.parseInt(split[0]), os);
+                }
 
-                byte[] encodedString = flipTheBytes(encodeString(split[1]));
-
-                os.write(encodedString);
+                writeString(split[1], os);
             }
         }
+    }
+
+    /**
+     * Writes the length of the string, then its encoded contents to the given output stream.
+     */
+    private static void writeString(String string, OutputStream os) throws IOException {
+        writeInt32(string.length(), os);
+        if (string.isEmpty()) return;
+
+        byte[] encodedString = flipTheBytes(encodeString(string));
+        os.write(encodedString);
     }
 
     /**
