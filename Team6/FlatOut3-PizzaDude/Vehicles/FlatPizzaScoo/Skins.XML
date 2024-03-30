@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <Skin Name="_C1" TextureAdd="_C1" MenuR="80" MenuG="140" MenuB="140" ShadowStyle="CarShadow" ScaleX="1.2" ScaleY="1" ShadowTexture="Carshadow.DCT" ShadowR="0" ShadowG="0" ShadowB="0" ShadowA="1" ShadowShader="dcCarShadow.DCS"/>
+  <Skin Name="_C2" TextureAdd="_C2" MenuR="80" MenuG="140" MenuB="140" ShadowStyle="CarShadow" ScaleX="1.2" ScaleY="1" ShadowTexture="Carshadow.DCT" ShadowR="0" ShadowG="0" ShadowB="0" ShadowA="1" ShadowShader="dcCarShadow.DCS"/>
+  <Skin Name="_C3" TextureAdd="_C3" MenuR="80" MenuG="140" MenuB="140" ShadowStyle="CarShadow" ScaleX="1.2" ScaleY="1" ShadowTexture="Carshadow.DCT" ShadowR="0" ShadowG="0" ShadowB="0" ShadowA="1" ShadowShader="dcCarShadow.DCS"/>
+</root>

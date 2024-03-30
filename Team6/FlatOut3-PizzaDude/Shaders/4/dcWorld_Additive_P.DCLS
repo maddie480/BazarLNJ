@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+	<Stage Texture="Tex0" ColorOp="SelectArg1" ColorArg1="Texture" ColorArg2="Diffuse" AlphaOp="Modulate" AlphaArg1="Texture" AlphaArg2="Diffuse"/>
+</Root>

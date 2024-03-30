@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  
+  <File Name="Common_PC_Classics.XML"/>
+  <File Name="Common_Properties_Classics.XML"/>
+  <File Name="Common_Cameras.XML"/>
+  <LocalFile Name="DamageObjects.XML"/>
+  <LocalFile Name="Skins.XML"/>
+</root>

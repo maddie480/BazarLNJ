@@ -1,0 +1,55 @@
+diff --git a/Data/Autoexec.lua b/Data/Autoexec.lua
+index 0cf8b08..e075fc2 100755
+--- a/Data/Autoexec.lua
++++ b/Data/Autoexec.lua
+@@ -1,7 +1,7 @@
+ -- Team6 startup script
+ Windowed = false
+ VSync = 0
+-Debug = false
++Debug = true
+ IntroMovies = false
+ ShowIntroCompanies = false
+ Demo = false
+diff --git a/Data/Lua/Cars.lua b/Data/Lua/Cars.lua
+index b2d7d08..ee3dd70 100755
+--- a/Data/Lua/Cars.lua
++++ b/Data/Lua/Cars.lua
+@@ -133,6 +133,11 @@ if (not Demo) then
+ 	SplatoutCar:AddUnrestrictedCar(FlatOutCarZombie11)
+ 	SplatoutCar:AddUnrestrictedCar(FlatOutCarZombie12)
+ 	SplatoutCar:AddUnrestrictedCar(FlatOutCarZombie13)
++
++	ClassicCar:AddCar(FlatPizzaQuad)
++	ClassicCar:AddUnrestrictedCar(FlatPizzaQuad)
++	ClassicCar:AddCar(FlatPizzaScoo)
++	ClassicCar:AddUnrestrictedCar(FlatPizzaScoo)
+ 	
+ else
+ 	StuntCar:AddCar(FlatoutCar18);
+diff --git a/Data/Lua/Cars/FlatPizzaQuad.lua b/Data/Lua/Cars/FlatPizzaQuad.lua
+new file mode 100755
+index 0000000..8046f7b
+--- /dev/null
++++ b/Data/Lua/Cars/FlatPizzaQuad.lua
+@@ -0,0 +1,7 @@
++FlatPizzaQuad = Car("FlatPizzaQuad")
++FlatPizzaQuad.Handling = 1
++FlatPizzaQuad.Acceleration = 4
++FlatPizzaQuad.Speed = 4
++FlatPizzaQuad.Strength = 1
++
++FlatPizzaQuad:AddTuning(Tuning("Default", "pc.xml"))
+diff --git a/Data/Lua/Cars/FlatPizzaScoo.lua b/Data/Lua/Cars/FlatPizzaScoo.lua
+new file mode 100755
+index 0000000..c40ed45
+--- /dev/null
++++ b/Data/Lua/Cars/FlatPizzaScoo.lua
+@@ -0,0 +1,7 @@
++FlatPizzaScoo = Car("FlatPizzaScoo")
++FlatPizzaScoo.Handling = 1
++FlatPizzaScoo.Acceleration = 4
++FlatPizzaScoo.Speed = 4
++FlatPizzaScoo.Strength = 1
++
++FlatPizzaScoo:AddTuning(Tuning("Default", "pc.xml"))

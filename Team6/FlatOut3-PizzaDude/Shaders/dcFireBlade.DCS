@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+	<Style Name="Default">
+		<Technique DetailID="1">
+			<Pass Index="4">
+				<Fragment VShader="1\dcFireBlade_V.HLSL" PShader="1\dcWorld_Additive_P.HLSL" AlphaBlend="1" SrcBlend="SrcAlpha" DestBlend="One" ZWrite="0" ZTest="LessEqual" Culling="None"/>
+			</Pass>
+		</Technique>
+		<Technique DetailID="4">
+			<Pass Index="4">
+				<Fragment VShader="1\dcFireBlade_V.HLSL" PShader="4\dcWorld_Additive_P.DCLS" AlphaBlend="1" SrcBlend="SrcAlpha" DestBlend="One" ZWrite="0" ZTest="LessEqual" Culling="None"/>
+			</Pass>
+		</Technique>
+	</Style>
+</Root>

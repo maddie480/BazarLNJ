@@ -1,0 +1,15 @@
+diff --git a/Misc/French.txt b/Misc/French.txt
+index e40aeca..2ffd78e 100644
+--- a/Misc/French.txt
++++ b/Misc/French.txt
+@@ -786,6 +786,10 @@ FLatoutCar61_name;Bad Boy
+ FlatoutCar61_description;0 
+ FLatoutCar62_name;Dragonfly RK
+ FlatoutCar62_description;0 
++FlatPizzaQuad_name;Quad (Pizza Dude)
++FlatPizzaQuad_description;0 
++FlatPizzaScoo_name;Scooter (Pizza Dude)
++FlatPizzaScoo_description;0 
+ CareerText1;Défi 1 : Finissez premier pour gagner.
+ CareerText2;Défi 2 : Gagnez le plus de points en infligeant des dégâts aux autres voitures.
+ CareerText3;Défi 3 : Finissez premier pour gagner.

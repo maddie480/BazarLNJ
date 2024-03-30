@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+
+  <DamageObject Name="Damage_Hood">
+    <Body Mass="50" AeroFriction0="100" AeroFriction1="100" ContactFriction="10"/>
+    <Hinge CFM="0.001" Friction="1" Bounciness="0.9">
+      <Axis x="1" y="0" z="0"/>
+      <Angle Min="-90" Max="0"/>
+      <Limit CFM="0.00000001" ERP="0.7"/>
+      <Break Hp="500" Force="1500000" Effect="FX\Flatout_Damage_CarBreakPart.xml"/>
+      <Destroy Force="20000000" ImpulseY="900000" ImpulseZ="-400000" Effect1="FX\Flatout_Damage_CarPart.xml"/>
+    </Hinge>
+  </DamageObject>
+
+  <DamageObject Name="Damage_Door1">
+    <Body Mass="100" AeroFriction0="100" AeroFriction1="100" ContactFriction="10"/>
+    <Hinge CFM="0.00001" Friction="10" Bounciness="0.1">
+      <Axis x="0" y="1" z="0"/>
+      <Angle Min="-60" Max="0"/>
+      <Limit CFM="0.00000001" ERP="0.7"/>
+      <Break Hp="700" Force="1000000" Effect="FX\Flatout_Damage_Sparky_Right.xml"/>
+      <Destroy Force="20000000" ImpulseX="700000" ImpulseY="600000" Effect1="FX\Flatout_Damage_CarPart.xml"/>
+    </Hinge>
+  </DamageObject>
+
+  <DamageObject Name="Damage_Door2">
+    <Body Mass="100" AeroFriction0="100" AeroFriction1="100" ContactFriction="10"/>
+    <Hinge CFM="0.00001" Friction="10" Bounciness="0.1">
+      <Axis x="0" y="1" z="0"/>
+      <Angle Min="0" Max="60"/>
+      <Limit CFM="0.00000001" ERP="0.7"/>
+      <Break Hp="800" Force="1000000" Effect="FX\Flatout_Damage_Sparky_Left.xml"/>
+      <Destroy Force="20000000" ImpulseX="-700000" ImpulseY="600000" Effect1="FX\Flatout_Damage_CarPart.xml"/>
+    </Hinge>
+  </DamageObject>
+  
+
+  
+
+<DamageObject Name="damage_trunk">
+    <Body Mass="10" AeroFriction0="1" AeroFriction1="1" ContactFriction="5"/>
+    <Hinge CFM="0.00001" Friction="0" Bounciness="0.7">
+      <Axis x="1" y="0" z="0"/>
+      <Angle Min="0" Max="30"/>
+      <Limit CFM="0.00000001" ERP="0.7"/>
+    </Hinge>
+    <Break Hp="650" Force="1500000" Effect="FX\Flatout_Damage_Sparky_Rear.xml"/>
+    <Destroy Force="16000000" ImpulseY="90000" Effect1="FX\Flatout_Damage_CarPart.xml"/>
+  </DamageObject>
+
+  <!--Rear Spoiler
+  <DamageObject Name="damage_rear_spoiler">
+    <Body Mass="10" AeroFriction0="0" AeroFriction1="0" ContactFriction="5"/>
+    <Hinge CFM="0.00001" Friction="0" Bounciness="0.9">
+      <Axis x="1" y="0" z="0"/>
+      <Angle Min="0" Max="0"/>
+      <Limit CFM="0.00000001" ERP="0.7"/>
+    </Hinge>
+    <Hinge2 CFM="0.00001" Friction="0" Bounciness="0.9">
+      <Axis x="0" y="1" z="0"/>
+      <Angle Min="-30" Max="0"/>
+      <Limit CFM="0.00000001" ERP="0.7"/>
+    </Hinge2>
+    <Break Hp="650" Force="500000" Effect="FX\Flatout_Damage_CarPart.xml"/>
+    <Destroy Force="16000000" ImpulseY="90000" Effect1="FX\Flatout_Damage_CarPart.xml"/>
+  </DamageObject>-->
+  
+  <!--Front Bumper-->
+  <DamageObject Name="damage_front_Bumper">
+    <Body Mass="10" AeroFriction0="1" AeroFriction1="1" ContactFriction="5"/>
+    <Hinge CFM="0.00001" Friction="0" Bounciness="0.1">
+      <Axis x="0" y="0" z="1"/>
+      <Angle Min="" Max="0"/>
+      <Limit CFM="0.00000001" ERP="0.7"/>
+    </Hinge>
+    <Hinge2 CFM="0.00001" Friction="0" Bounciness="0.1">
+      <Axis x="0" y="1" z="0"/>
+      <Angle Min="0" Max="30"/>
+      <Limit CFM="0.00000001" ERP="0.7"/>
+    </Hinge2>
+    <Break Hp="800" Force="3500000" Effect="FX\Flatout_Damage_CarBreakPart.xml"/>
+    <Destroy Force="20000000" ImpulseY="90000" ImpulseZ="-90000" Effect1="FX\Flatout_Damage_CarPart.xml"/>
+  </DamageObject>
+  
+  <DamageObject Name="Window_front" HideOnBreak="1">
+    <Break Hp="900" Force="10000"/>
+    <Destroy Force="200000" Effect0="FX\Flatout_Damage_Window_Front.xml"/>
+  </DamageObject>
+
+</root>

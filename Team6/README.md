@@ -38,14 +38,6 @@ Quand le mode test est activé, quelques touches gagnent une nouvelle fonction :
   - F1 : sortir du mode free cam
 - T : affiche une grille et fait lag le jeu (je sais pas trop ce que ça représente ce truc là)
 
-## La console dans FlatOut 3
-
-Oui, même [FlatOut 3](https://store.steampowered.com/app/201510/Flatout_3_Chaos__Destruction/) a presque la même console que Pizza Dude, sorti 6 ans plus tôt ! :sweat_smile: Pour l'activer il suffit de prendre `Flatout3_Data.bin` et de le déposer dans le dossier du jeu sous le nom `Data.bin`, en remplaçant le fichier existant.
-
-Ce fichier `Data.bin` est en fait _une archive ZIP protégée par mot de passe_ :sparkles: Le mot de passe est : `k8p0cfY6sXStHfFH` (je l'ai trouvé en fouillant dans l'exécutable du jeu). Cette archive contient des fichiers Lua qui peuvent être modifiés pour bidouiller les menus ou activer le debug mode, entre autres :smile:
-
-D'ailleurs, il y a une fonction pour afficher les logos de Team6 et de Strategy First (l'éditeur) au démarrage du jeu... mais elle est désactivée par défaut :thinking: Elle peut être activée en passant `ShowIntroCompanies` à `true` en haut du fichier `Autoexec.lua`.
-
 ## Jeu en réseau
 
 La plupart des jeux de cette époque fonctionnent de la même façon pour ce qui est du jeu en réseau : en mode "jeu local", le serveur envoie un paquet à tout le réseau local (broadcast UDP sur le port 24958), les clients l'attrapent et se connectent en TCP (toujours sur le port 24958) à l'expéditeur du paquet UDP.
@@ -114,3 +106,17 @@ Des programmes ont été écrits pour décoder ces 4 formats de textures et les 
 Ces programmes sont dans le dossier `AssetConverter-src`, et les pipelines GitHub se feront un plaisir de le compiler et de l'exécuter pour décoder les textures de Pizza Dude.
 
 Le dossier `tokentextures` contient de superbes textures de pièces réalisées par Jeanvik et Zekium, et la pipeline s'occupera de les convertir au format DCT pour pouvoir _mettre Chirac en 3D dans le jeu_.
+
+## Mes expériences sur FlatOut 3
+
+Oui, même [FlatOut 3](https://store.steampowered.com/app/201510/Flatout_3_Chaos__Destruction/) a presque la même console que Pizza Dude, sorti 6 ans plus tôt ! :sweat_smile:
+
+Le dossier du jeu contient un fichier `Data.bin`, qui est en fait _une archive ZIP protégée par mot de passe_ :sparkles: Le mot de passe est : `k8p0cfY6sXStHfFH` (je l'ai trouvé en fouillant dans l'exécutable du jeu). Cette archive contient des fichiers Lua qui peuvent être modifiés pour bidouiller les menus ou activer le debug mode, entre autres :smile: Pour le debug mode, il faut passer `Debug` à `true` en haut du fichier `Autoexec.lua`.
+
+D'ailleurs, il y a une fonction pour afficher les logos de Team6 et de Strategy First (l'éditeur) au démarrage du jeu... mais elle est désactivée par défaut :thinking: Elle peut être activée en passant `ShowIntroCompanies` à `true` en haut du fichier `Autoexec.lua`.
+
+J'ai aussi pu intégrer **le quad et le scooter de Pizza Dude** dans FlatOut 3, vu que c'est le même moteur ! Les petits patchs à effectuer sont dans le dossier `FlatOut3-PizzaDude` :
+- `Misc.diff` contient les modifications à appliquer dans le fichier `Misc\French.DCL` en le convertissant au format TXT (voir [Les fichiers de langue](#les-fichiers-de-langue)), puis en faisant `git apply Misc.diff`.
+- `Data.diff` contient les modifications à appliquer à `Data.bin` en l'extrayant dans un dossier `Data`, puis en faisant `git apply Data.diff`.
+- Les dossiers `Shaders`, `Textures` et `Vehicles` doivent juste être fusionnés avec ceux du jeu.
+
