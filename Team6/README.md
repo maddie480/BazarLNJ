@@ -115,8 +115,8 @@ Le dossier du jeu contient un fichier `Data.bin`, qui est en fait _une archive Z
 
 D'ailleurs, il y a une fonction pour afficher les logos de Team6 et de Strategy First (l'éditeur) au démarrage du jeu... mais elle est désactivée par défaut :thinking: Elle peut être activée en passant `ShowIntroCompanies` à `true` en haut du fichier `Autoexec.lua`.
 
-J'ai aussi pu intégrer **le quad et le scooter de Pizza Dude** dans FlatOut 3, vu que c'est le même moteur ! Les petits patchs à effectuer sont dans le dossier `FlatOut3-PizzaDude` :
+J'ai aussi pu intégrer **le quad et le scooter de Pizza Dude** dans FlatOut 3, vu que c'est le même moteur ! J'ai aussi importé Pizza Dude et Pizza Girl eux-mêmes, mais ils sont minuscules et pas dans le bon sens pour des raisons inexpliquées :thinking: Les petits patchs à effectuer sont dans le dossier `FlatOut3-PizzaDude` :
 - `Misc.diff` contient les modifications à appliquer dans le fichier `Misc\French.DCL` en le convertissant au format TXT (voir [Les fichiers de langue](#les-fichiers-de-langue)), puis en faisant `git apply Misc.diff`.
 - `Data.diff` contient les modifications à appliquer à `Data.bin` en l'extrayant dans un dossier `Data`, puis en faisant `git apply Data.diff`.
-- Les dossiers `Shaders`, `Textures` et `Vehicles` doivent juste être fusionnés avec ceux du jeu.
+- Les dossiers `Characters`, `Shaders`, `Textures` et `Vehicles` doivent juste être fusionnés avec ceux du jeu.
 

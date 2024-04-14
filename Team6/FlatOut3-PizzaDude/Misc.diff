@@ -1,8 +1,19 @@
 diff --git a/Misc/French.txt b/Misc/French.txt
-index e40aeca..2ffd78e 100644
+index e40aeca..8d37d5e 100644
 --- a/Misc/French.txt
 +++ b/Misc/French.txt
-@@ -786,6 +786,10 @@ FLatoutCar61_name;Bad Boy
+@@ -622,6 +622,10 @@ Player20_name;Thirtyfour Rupias
+ Player20_description;Un rappeur de plus de 100 kilos de muscles durs comme la pierre. Il est connu pour s'extirper de son véhicule détruit et continuer un destruction derby à pied.
+ Player21_name;Noëlle 2011
+ Player21_description;Elle vit au Pôle nord, et son cerveau n'a pas mis de temps à geler. Maintenant elle croit qu'elle peut voler comme le Père Noël !
++PizzaDude_name;Pizza Dude
++PizzaDude_description;Pizza Dude était, bah... livreur de pizzas, jusqu'à ce que sa pizzeria rachète le FlatOut de l'année 2011. Il décide alors de participer, même s'il mesure 10 cm depuis un tragique accident de modding.
++PizzaGirl_name;Pizza Girl
++PizzaGirl_description;Pizza Girl a acquis beaucoup d'expérience en pilotage sur son scooter, et elle est prête à faire ses preuves dans FlatOut 3, un autre jeu du Team 6 Cinematic Universe (tm).
+ AIPlayer01;Justin Case
+ AIPlayer02;Eva Mentoz
+ AIPlayer03;Bob Earl Homer DeLuxe
+@@ -786,6 +790,10 @@ FLatoutCar61_name;Bad Boy
  FlatoutCar61_description;0 
  FLatoutCar62_name;Dragonfly RK
  FlatoutCar62_description;0 
