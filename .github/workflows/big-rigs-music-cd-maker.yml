@@ -20,7 +20,7 @@ jobs:
         curl -o build_cd.py https://gist.githubusercontent.com/spicyjpeg/97c450320796fc0cb00c2a1490fad98d/raw/76b2bf1589ad6c463a60633160d8d3ca4436dcbd/build_audio_cd.py
 
         curl https://www.myabandonware.com/game/big-rigs-over-the-road-racing-bc4 --cookie-jar cookie.txt > /dev/null
-        curl -Lo Big_Rigs.zip https://www.myabandonware.com/download/r5p-big-rigs-over-the-road-racing --cookie cookie.txt
+        curl -Lo Big_Rigs.zip https://www.myabandonware.com/download/m62x-big-rigs-over-the-road-racing --cookie cookie.txt
 
         7z x Big_Rigs.zip
         7z x BROTRR.iso
