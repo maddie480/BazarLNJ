@@ -75,7 +75,7 @@ while (pointer < 0x211588) {
 return 0;
 ```
 
-En prenant un éditeur hexa, on peut modifier `0x2F5CA` pour mettre `EB` (`jmp`) à la place de `74` (`je`), et paf :
+En prenant un éditeur hexa, on peut modifier `0x2F46A` pour mettre `EB` (`jmp`) à la place de `74` (`je`), et paf :
 ```c
 uint32_t hash = c_rotate_20940();
 if (hash == 0) return 0;
@@ -93,7 +93,7 @@ La méthode renvoie 1 quel que soit le hash (sauf 0, mais bon hein).
 Et pour finir, il faut faire sauter une protection que le moteur du jeu a contre la modification de son propre code... mais heureusement, GameStudio a une option de ligne de commande pour ça : `-nc`.
 
 **En résumé :**
-- modifier `acknex.dll` et `Main/acknex.dll` pour changer l'octet à la position `0x2F5CA` de `74` à `EB`
+- modifier `acknex.dll` et `Main/acknex.dll` pour changer l'octet à la position `0x2F46A` de `74` à `EB`
 - faire un raccourci vers `Main/shsprogram.exe` avec les options `-nx60 -diag -nc`
 
 Et pouf, vous pouvez maintenant modifier les fichiers `.wdl` du jeu pour changer son code.
