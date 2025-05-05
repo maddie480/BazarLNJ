@@ -14,8 +14,8 @@ jobs:
     - name: Restore with .NET Core
       run: cd DarkYears/Modding-src && dotnet restore *.sln
 
-    - name: Build using Mono
-      run: cd DarkYears/Modding-src && msbuild *.sln "/p:Configuration=Release"
+    - name: Build using .NET Core
+      run: cd DarkYears/Modding-src && dotnet build *.sln --configuration Release --no-restore
 
     - name: Upload build as artifact
       uses: actions/upload-artifact@v4

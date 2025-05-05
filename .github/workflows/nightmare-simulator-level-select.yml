@@ -14,8 +14,8 @@ jobs:
     - name: Restore with .NET Core
       run: cd NightmareSimulator/LevelSelect-src && dotnet restore *.sln
 
-    - name: Build using Mono
-      run: cd NightmareSimulator/LevelSelect-src && msbuild *.sln "/p:Configuration=Release"
+    - name: Build using .NET Core
+      run: cd NightmareSimulator/LevelSelect-src && dotnet build *.sln --configuration Release --no-restore
 
     - name: Upload build as artifact
       uses: actions/upload-artifact@v4
