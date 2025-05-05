@@ -21,7 +21,7 @@ jobs:
         sed -i 's/av.AudioResampler("flt", 2, 44100)/av.AudioResampler("flt", "stereo", 44100)/' build_cd.py
 
         # Mirror of the Abandonware France zip, on a website I actually paid for,
-        # with a 100 MB file limit 
+        # with a 100 MB file limit
         curl --retry 3 --fail -o Big_Rigs.7z.001 https://files.gamebanana.com/bitpit/brotrrrrrr7z.001
         curl --retry 3 --fail -o Big_Rigs.7z.002 https://files.gamebanana.com/bitpit/brotrrrrrr7z.002
         curl --retry 3 --fail -o Big_Rigs.7z.003 https://files.gamebanana.com/bitpit/brotrrrrrr7z.003
