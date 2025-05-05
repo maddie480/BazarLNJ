@@ -18,7 +18,7 @@ _Fun fact :_ la police est fournie au format bmp avec le jeu... mais vu qu'elle 
 
 Le jeu part du principe que tu as un CD qui possède les musiques du jeu au format CD audio qui est inséré dans le lecteur D: de ton ordinateur. Si c'est le cas, tu auras de la musique dans ton jeu.
 
-Il y a un ISO disponible au téléchargement sur My Abandonware, mais au lieu de vraies pistes audio, il contient les musiques au format WAV pour une raison obscure. Ce dépôt contient un script pour convertir la musique de cet ISO au format CD audio (les fichiers de sortie sont un BIN et un CUE). Si tu insères ce CD dans ton lecteur D:, tu pourras profiter de la _super_ musique de ce jeu ! (Sinon, écoute-la sur Radio LNJ, ça marche aussi.)
+Il y a un ISO disponible au téléchargement sur Abandonware France, mais au lieu de vraies pistes audio, il contient les musiques au format WAV pour une raison obscure. Ce dépôt contient un script pour convertir la musique de cet ISO au format CD audio (les fichiers de sortie sont un BIN et un CUE). Si tu insères ce CD dans ton lecteur D:, tu pourras profiter de la _super_ musique de ce jeu ! (Sinon, écoute-la sur Radio LNJ, ça marche aussi.)
 
 ## Les véhicules cachés
 
@@ -42,8 +42,6 @@ Permutez juste les lignes pour que les 4 premières soient les véhicules que vo
 Le jeu utilise beaucoup de fichiers texte, donc il doit être facilement moddable... mais je suis absolument pas inspirée là-dessus. :sweat_smile:
 
 ## La version non patchée
-
-_(Il s'agit de la version "setup" sur My Abandonware, la version ISO est à priori une autre version)_
 
 - Il y a une free cam ! En appuyant sur C, on peut se balader dans le niveau avec ZQSD, A et E bougent verticalement, W se téléporte vers ton véhicule, et Shift fait aller la caméra plus vite.
 - Tab te permet de contrôler ton adversaire (qui ne bouge pas)... ou de faire planter le jeu.
