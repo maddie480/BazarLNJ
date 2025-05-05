@@ -10,8 +10,6 @@ jobs:
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 2.2.108
 
     - name: Restore with .NET Core
       run: cd NightmareSimulator/LevelSelect-src && dotnet restore *.sln
