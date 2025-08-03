@@ -37,7 +37,7 @@ jobs:
       env:
         PIZZA_DUDE_SRC: ${{ secrets.PIZZA_DUDE_SRC }}
       run: |
-        curl -o PizzaDude.zip $PIZZA_DUDE_SRC
+        curl -Lo PizzaDude.zip $PIZZA_DUDE_SRC
         unzip PizzaDude.zip
         java -cp Team6/AssetConverter-src/out ovh.maddie480.TextureDecoder "Pizza Dude" converter_output
 

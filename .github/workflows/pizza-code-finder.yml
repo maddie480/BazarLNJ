@@ -26,7 +26,7 @@ jobs:
       env:
         CALLAPIZZA_DUDE_URL: ${{ secrets.CALLAPIZZA_DUDE_URL }}
       run: |
-        curl -o "Pizza CAP.exe" $CALLAPIZZA_DUDE_URL
+        curl -Lo "Pizza CAP.exe" $CALLAPIZZA_DUDE_URL
         mkdir out
         java -cp Team6/PizzaCodeFinder-src ovh.maddie480.PizzaCodeFinder > out/pizza_codes.txt
         echo "Here is a random pizza code:"
