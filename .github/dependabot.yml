@@ -9,3 +9,13 @@ updates:
     directory: "AirControl/LevelSelect-src"
     schedule:
       interval: "daily"
+
+  - package-ecosystem: "nuget"
+    directory: "DarkYears/Modding-src"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "nuget"
+    directory: "NightmareSimulator/LevelSelect-src"
+    schedule:
+      interval: "daily"
