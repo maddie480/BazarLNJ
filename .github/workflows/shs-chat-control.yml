@@ -33,7 +33,7 @@ jobs:
         mv -v java-se-8u43-ri/jre dist/
 
     - name: Upload build as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: SHSChatControl
         path: dist

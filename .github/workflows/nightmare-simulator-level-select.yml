@@ -18,7 +18,7 @@ jobs:
       run: cd NightmareSimulator/LevelSelect-src && dotnet build *.sln --configuration Release --no-restore
 
     - name: Upload build as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: NightmareSimulatorLevelSelect
         path: NightmareSimulator/LevelSelect-src/bin/Release/net452
