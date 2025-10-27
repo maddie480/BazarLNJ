@@ -28,7 +28,7 @@ jobs:
         mv ovh/maddie480/*.class out/production/TextureExtractor-src/ovh/maddie480/
 
     - name: Upload compiled sources as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: GeopoliticalSimulatorGPExplorer
         path: GeopoliticalSimulator/TextureExtractor-src/out/production/TextureExtractor-src
@@ -39,7 +39,7 @@ jobs:
         ./GeopoliticalSimulator/TextureExtractor-src/convert.sh
 
     - name: Upload converted files as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: GeopoliticalSimulatorConvertedTextures
         path: /tmp/gp-explorer/target

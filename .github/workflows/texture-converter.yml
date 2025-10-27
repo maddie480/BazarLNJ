@@ -28,7 +28,7 @@ jobs:
         mv ovh out
 
     - name: Upload compiled sources as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: Team6TextureConverter
         path: Team6/AssetConverter-src/out
@@ -49,13 +49,13 @@ jobs:
         done
 
     - name: Upload converted files as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: PizzaDudeConvertedTextures
         path: converter_output
 
     - name: Upload token textures as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: PizzaDudeTokenTextures
         path: textures

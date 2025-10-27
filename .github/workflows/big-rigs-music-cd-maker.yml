@@ -34,7 +34,7 @@ jobs:
         python3 build_cd.py output/Big_Rigs_Audio.bin Music/Track2.wav Music/Track*
 
     - name: Upload generated CD as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: BigRigsAudio
         path: output
