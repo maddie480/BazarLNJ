@@ -7,7 +7,7 @@ origdir=`pwd`
 mkdir -p /tmp/gp-explorer
 cd /tmp/gp-explorer
 
-curl --fail -o commons-io.jar https://repo1.maven.org/maven2/commons-io/commons-io/2.20.0/commons-io-2.20.0.jar
+curl --fail -o commons-io.jar https://repo1.maven.org/maven2/commons-io/commons-io/2.21.0/commons-io-2.21.0.jar
 
 curl -L --retry 3 --retry-all-errors -o gpsfiles-001.tar https://files.gamebanana.com/bitpit/gpsfiles-001.tar
 curl -L --retry 3 --retry-all-errors -o gpsfiles-002.tar https://files.gamebanana.com/bitpit/gpsfiles-002.tar
