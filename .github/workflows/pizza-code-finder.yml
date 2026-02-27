@@ -33,7 +33,7 @@ jobs:
         shuf -n 1 out/pizza_codes.txt
 
     - name: Upload found codes as artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: PizzaCodes
         path: out
