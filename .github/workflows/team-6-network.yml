@@ -23,10 +23,10 @@ jobs:
     - name: Build and Prepare Package
       run: |
         cd Team6/NetworkPlay-src
-        javac ovh/maddie480/*.java
+        javac ovh/maddie480/teamsixnetwork/*.java
         cd ../..
-        mkdir -pv dist/classes/ovh/maddie480
-        mv -v Team6/NetworkPlay-src/ovh/maddie480/*.class dist/classes/ovh/maddie480/
+        mkdir -pv dist/classes/ovh/maddie480/teamsixnetwork/
+        mv -v Team6/NetworkPlay-src/ovh/maddie480/teamsixnetwork/*.class dist/classes/ovh/maddie480/teamsixnetwork/
         mv -v Team6/NetworkPlay-src/*.bat dist/
         curl -o java.zip https://download.java.net/openjdk/jdk8u43/ri/openjdk-8u43-windows-i586.zip
         unzip java.zip
