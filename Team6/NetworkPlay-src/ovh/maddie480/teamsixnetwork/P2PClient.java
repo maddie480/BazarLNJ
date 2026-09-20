@@ -6,6 +6,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.*;
 
+import static ovh.maddie480.teamsixnetwork.P2PLauncher.readSingleByte;
+import static ovh.maddie480.teamsixnetwork.P2PLauncher.unstoppableRead;
+
 public class P2PClient {
     private static Socket socketWithGame;
 
@@ -24,20 +27,18 @@ public class P2PClient {
                 // except the sender always has ID 0
                 ByteArrayInputStream iis;
                 {
-                    int sender = is.read();
-                    if (sender == -1) throw new IOException("Connection closed");
+                    int sender = readSingleByte(is);
                     if (sender != 0) throw new IOException("Unexpected sender");
 
-                    int size = is.read();
-                    if (size == -1) throw new IOException("Connection closed");
+                    int size = readSingleByte(is);
 
                     byte[] contents = new byte[size];
-                    if (is.read(contents) != size) throw new IOException("Connection closed");
+                    unstoppableRead(is, contents);
 
                     iis = new ByteArrayInputStream(contents);
                 }
 
-                int opcode = iis.read();
+                int opcode = readSingleByte(iis);
 
                 switch (opcode) {
                     case 2: { // TCP disconnect
@@ -50,24 +51,19 @@ public class P2PClient {
                     }
 
                     case 3: { // TCP message
-                        int size = iis.read();
+                        int size = readSingleByte(iis);
                         byte[] bytes = new byte[size];
-                        int received = iis.read(bytes);
-                        if (received < size) {
-                            throw new IOException("Expected " + size + " bytes, received " + received);
-                        }
+                        unstoppableRead(iis, bytes);
                         System.out.println("TCP message received, size " + size);
                         socketWithGame.getOutputStream().write(bytes);
+                        socketWithGame.getOutputStream().flush();
                         break;
                     }
 
                     case 4: { // UDP message
-                        int size = iis.read();
+                        int size = readSingleByte(iis);
                         byte[] bytes = new byte[size];
-                        int received = iis.read(bytes);
-                        if (received < size) {
-                            throw new IOException("Expected " + size + " bytes, received " + received);
-                        }
+                        unstoppableRead(iis, bytes);
                         System.out.println("UDP message received, size " + size);
 
                         try (DatagramSocket socket = new DatagramSocket()) {

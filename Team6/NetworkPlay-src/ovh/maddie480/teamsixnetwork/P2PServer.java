@@ -10,6 +10,9 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ovh.maddie480.teamsixnetwork.P2PLauncher.readSingleByte;
+import static ovh.maddie480.teamsixnetwork.P2PLauncher.unstoppableRead;
+
 public class P2PServer {
     private static Socket socketWithServer;
     private static final Map<Byte, Connection> connections = new HashMap<>();
@@ -35,7 +38,7 @@ public class P2PServer {
         public void incomingPacket(byte[] packet) throws IOException {
             ByteArrayInputStream is = new ByteArrayInputStream(packet);
 
-            int opcode = is.read();
+            int opcode = readSingleByte(is);
             switch (opcode) {
                 case 1: { // TCP connect
                     System.out.println("[" + clientId + "] TCP connection open");
@@ -54,14 +57,12 @@ public class P2PServer {
                 }
 
                 case 3: { // TCP message
-                    int size = is.read();
+                    int size = readSingleByte(is);
                     byte[] bytes = new byte[size];
-                    int received = is.read(bytes);
-                    if (received < size) {
-                        throw new IOException("Expected " + size + " bytes, received " + received);
-                    }
+                    unstoppableRead(is, bytes);
                     System.out.println("[" + clientId + "] TCP message received, size " + size);
                     socketWithGame.getOutputStream().write(bytes);
+                    socketWithGame.getOutputStream().flush();
                     break;
                 }
 
@@ -151,12 +152,7 @@ public class P2PServer {
         while ((opcode = is.read()) != -1) {
             if (opcode < 2) {
                 // open/close connection
-                byte clientId;
-                {
-                    int clientIdI = is.read();
-                    if (clientIdI == -1) throw new IOException("Connection with server closed");
-                    clientId = (byte) clientIdI;
-                }
+                byte clientId = (byte) readSingleByte(is);
 
                 synchronized (connections) {
                     if (opcode == 0) {
@@ -172,11 +168,9 @@ public class P2PServer {
                 // packet received from a client
                 byte clientId = (byte) opcode;
 
-                int size = is.read();
-                if (size == -1) throw new IOException("Connection closed");
-
+                int size = readSingleByte(is);
                 byte[] content = new byte[size];
-                if (is.read(content) != size) throw new IOException("Connection closed");
+                unstoppableRead(is, content);
 
                 synchronized (connections) {
                     if (connections.containsKey(clientId)) {

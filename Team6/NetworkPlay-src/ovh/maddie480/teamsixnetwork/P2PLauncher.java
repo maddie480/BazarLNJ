@@ -96,8 +96,7 @@ public class P2PLauncher {
                         try {
                             sock.getOutputStream().write(serverList.getSelectedValue().getId());
 
-                            int result = sock.getInputStream().read();
-                            if (result == -1) throw new IOException("Connection closed");
+                            int result = readSingleByte(sock.getInputStream());
                             if (result == 0) {
                                 JOptionPane.showMessageDialog(window,
                                         "Could not join the selected server. Please try again!",
@@ -221,18 +220,14 @@ public class P2PLauncher {
         List<Server> servers = new ArrayList<>();
 
         while (true) {
-            int serverId = is.read();
+            int serverId = readSingleByte(is);
             if (serverId == 0) break;
-            if (serverId == -1) throw new IOException("Connection closed");
 
-            int playerCount = is.read();
-            if (playerCount == -1) throw new IOException("Connection closed");
-
-            int nameSize = is.read();
-            if (nameSize == -1) throw new IOException("Connection closed");
+            int playerCount = readSingleByte(is);
+            int nameSize = readSingleByte(is);
 
             byte[] name = new byte[nameSize];
-            if (is.read(name) != nameSize) throw new IOException("Connection closed");
+            unstoppableRead(is, name);
 
             servers.add(new Server(new String(name, StandardCharsets.UTF_8), serverId, playerCount));
         }
@@ -245,4 +240,22 @@ public class P2PLauncher {
         if (selectedBefore != null && list.getSelectedValue() == null) joinButton.setEnabled(false);
     }
 
+    static int readSingleByte(InputStream is) throws IOException {
+        int i = is.read();
+        if (i == -1) throw new IOException("Connection closed");
+        return i;
+    }
+
+    static void unstoppableRead(InputStream is, byte[] dest) throws IOException {
+        unstoppableRead(is, dest, 0, dest.length);
+    }
+
+    static void unstoppableRead(InputStream is, byte[] dest, int offset, int count) throws IOException {
+        while (count > 0) {
+            int readCount = is.read(dest, offset, count);
+            if (readCount == -1) throw new IOException("Connection closed");
+            offset += readCount;
+            count -= readCount;
+        }
+    }
 }
