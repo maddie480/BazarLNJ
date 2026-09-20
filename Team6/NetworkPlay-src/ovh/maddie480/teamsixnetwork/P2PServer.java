@@ -75,7 +75,7 @@ public class P2PServer {
             new Thread(() -> {
                 try (InputStream is = socketWithGame.getInputStream()) {
                     while (true) {
-                        byte[] b = new byte[255];
+                        byte[] b = new byte[250];
                         int size = is.read(b);
 
                         if (size == -1) {
@@ -192,7 +192,7 @@ public class P2PServer {
             try (DatagramSocket socket = new DatagramSocket(24958)) {
                 while (true) {
                     try {
-                        byte[] buffer = new byte[255];
+                        byte[] buffer = new byte[250];
                         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                         socket.receive(packet);
 

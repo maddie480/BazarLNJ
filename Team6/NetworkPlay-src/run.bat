@@ -1,1 +1,1 @@
-jre\bin\java.exe -cp classes ovh.maddie480.teamsixnetwork.P2PLauncher
+jre\bin\javaw.exe -cp classes ovh.maddie480.teamsixnetwork.P2PLauncher

@@ -96,6 +96,7 @@ public class P2PClient {
                     serverOutputStream.write(0); // recipient
                     serverOutputStream.write(1); // size
                     serverOutputStream.write(1); // TCP connect
+                    serverOutputStream.flush();
 
                     try (InputStream is = socketWithGame.getInputStream()) {
                         while (true) {
@@ -112,6 +113,7 @@ public class P2PClient {
                             serverOutputStream.write(3); // TCP message
                             serverOutputStream.write(size);
                             serverOutputStream.write(b, 0, size);
+                            serverOutputStream.flush();
                         }
 
                     } catch (IOException e) {
@@ -121,6 +123,7 @@ public class P2PClient {
                     serverOutputStream.write(0); // recipient
                     serverOutputStream.write(1); // size
                     serverOutputStream.write(2); // TCP disconnect
+                    serverOutputStream.flush();
 
                     System.out.println("Connection with game closed");
                     if (socketWithGame != null) {
